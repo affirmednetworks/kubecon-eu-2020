@@ -7,5 +7,5 @@
 Tuesday, August 18 • 14:30 - 15:05
 
 ## Slides
-https://docs.google.com/presentation/d/1gl1dPdz950M0DiyqIY7-bywhHbl0oSqqXTlt71R9Lww/edit?usp=sharing
+https://drive.google.com/file/d/1ipQD_4WvBKT9oZCk8UnPGZ4-eKgpvz3U/view?usp=sharing
 
