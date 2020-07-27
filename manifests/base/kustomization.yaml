@@ -1,0 +1,7 @@
+resources:
+- gateway.yaml
+- pdb.yaml
+- role.yaml
+- rolebinding.yaml
+- sa.yaml
+- service.yaml 
