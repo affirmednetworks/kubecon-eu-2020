@@ -6,7 +6,6 @@ metadata:
     istio: ingressgateway
   name: istio-ingressgateway
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: istio-ingressgateway
@@ -15,7 +14,6 @@ spec:
     metadata:
       annotations:
         sidecar.istio.io/inject: "false"
-      creationTimestamp: null
       labels:
         app: istio-ingressgateway
         istio: ingressgateway
@@ -37,6 +35,8 @@ spec:
           value: first-party-jwt
         - name: PILOT_CERT_PROVIDER
           value: istiod
+        - name: ISTIO_META_USER_SDS
+          value: "true"
         - name: CA_ADDR
           value: istiod.istio-system.svc:15012
         - name: NODE_NAME
@@ -144,9 +144,9 @@ spec:
           name: ingressgatewaysdsudspath
         - mountPath: /etc/istio/pod
           name: podinfo
-        # - mountPath: /etc/istio/ingressgateway-certs
-        #   name: ingressgateway-certs
-        #   readOnly: true
+        - mountPath: /etc/istio/ingressgateway-certs
+          name: ingressgateway-certs
+          readOnly: true
         - mountPath: /etc/istio/ingressgateway-ca-certs
           name: ingressgateway-ca-certs
           readOnly: true
@@ -183,13 +183,13 @@ spec:
           name: istio
           optional: true
         name: config-volume
-    #   - name: ingressgateway-certs
-    #     secret:
-    #       defaultMode: 420
-    #       optional: true
-    #       secretName: istio-ingressgateway-certs
-    #   - name: ingressgateway-ca-certs
-    #     secret:
-    #       defaultMode: 420
-    #       optional: true
-    #       secretName: istio-ingressgateway-ca-certs
+      - name: ingressgateway-certs
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: istio-ingressgateway-certs
+      - name: ingressgateway-ca-certs
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: istio-ingressgateway-ca-certs

@@ -1,0 +1,13 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  namespace: istio-system
+  name: kubecon-istiocontrolplane
+  namespace: istio-system
+spec:
+  profile: demo
+  components:
+    ingressGateways:
+    - enabled: false
+    egressGateways:
+    - enabled: false

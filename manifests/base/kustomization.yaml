@@ -5,6 +5,7 @@ commonLabels:
     event: kubecon-eu-2020
     
 resources:
+- deployment.yaml
 - gateway.yaml
 - virtualservice.yaml
 - pdb.yaml

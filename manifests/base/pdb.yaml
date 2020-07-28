@@ -5,13 +5,10 @@ metadata:
   labels:
     app: istio-ingressgateway
     istio: ingressgateway
-    release: istio
   name: istio-ingressgateway
-  
 spec:
   minAvailable: 1
   selector:
     matchLabels:
       app: istio-ingressgateway
       istio: ingressgateway
-      release: istio
