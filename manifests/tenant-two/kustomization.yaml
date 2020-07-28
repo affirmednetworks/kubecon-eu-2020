@@ -4,8 +4,13 @@ kind: Kustomization
 bases:
 - ../base
 
+patchesStrategicMerge:
+- gateway.yaml
+- virtualservice.yaml
+
 commonLabels:
   owner: tenant-two
+
 namespace: tenant-two
 
 generatorOptions:

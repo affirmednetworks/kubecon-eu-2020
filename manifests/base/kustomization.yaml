@@ -6,6 +6,7 @@ commonLabels:
     
 resources:
 - gateway.yaml
+- virtualservice.yaml
 - pdb.yaml
 - role.yaml
 - rolebinding.yaml

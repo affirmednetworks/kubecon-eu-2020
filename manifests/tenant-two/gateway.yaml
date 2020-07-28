@@ -11,13 +11,13 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - "*"
+    - tenant-two.example.com
   - port:
       number: 443
       name: https
       protocol: HTTPS
     hosts:
-    - "*"
+    - tenant-two.example.com
     tls:
       mode: MUTUAL
       credentialName: ingressgateway-certs

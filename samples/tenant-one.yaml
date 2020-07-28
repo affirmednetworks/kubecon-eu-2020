@@ -1,0 +1,201 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one"},"name":"istio-ingressgateway-service-account","namespace":"tenant-one"}}
+    labels:
+      app: istio-ingressgateway
+      event: kubecon-eu-2020
+      istio: ingressgateway
+      owner: tenant-one
+    name: istio-ingressgateway-service-account
+    namespace: tenant-one
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: Role
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"Role","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-one"},"name":"istio-ingressgateway-sds","namespace":"tenant-one"},"rules":[{"apiGroups":[""],"resources":["secrets"],"verbs":["get","watch","list"]}]}
+    labels:
+      event: kubecon-eu-2020
+      owner: tenant-one
+    name: istio-ingressgateway-sds
+    namespace: tenant-one
+  rules:
+  - apiGroups:
+    - ""
+    resources:
+    - secrets
+    verbs:
+    - get
+    - watch
+    - list
+- apiVersion: rbac.authorization.k8s.io/v1
+  kind: RoleBinding
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"RoleBinding","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-one"},"name":"istio-ingressgateway-sds","namespace":"tenant-one"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"Role","name":"istio-ingressgateway-sds"},"subjects":[{"kind":"ServiceAccount","name":"istio-ingressgateway-service-account","namespace":"tenant-one"}]}
+    labels:
+      event: kubecon-eu-2020
+      owner: tenant-one
+    name: istio-ingressgateway-sds
+    namespace: tenant-one
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: Role
+    name: istio-ingressgateway-sds
+  subjects:
+  - kind: ServiceAccount
+    name: istio-ingressgateway-service-account
+    namespace: tenant-one
+- apiVersion: v1
+  data:
+    cacert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZQRENDQTZTZ0F3SUJBZ0lSQVBIMGlLWDFoVG9NZ3ZmNk1Pbk1NUFF3RFFZSktvWklodmNOQVFFTEJRQXcKZ2JVeEhqQWNCZ05WQkFvVEZXMXJZMlZ5ZENCa1pYWmxiRzl3YldWdWRDQkRRVEZGTUVNR0ExVUVDd3c4Ym1sMAphWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHphRTFDVUM1bWFXOXpMWEp2ZFhSbGNpNW9iMjFsSUNoT2FYUnBjMmdnClRXRnNhRzkwY21FcE1Vd3dTZ1lEVlFRRERFTnRhMk5sY25RZ2JtbDBhWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHoKYUUxQ1VDNW1hVzl6TFhKdmRYUmxjaTVvYjIxbElDaE9hWFJwYzJnZ1RXRnNhRzkwY21FcE1CNFhEVEl3TURjeQpPREF6TVRNeU1Wb1hEVE13TURjeU9EQXpNVE15TVZvd2diVXhIakFjQmdOVkJBb1RGVzFyWTJWeWRDQmtaWFpsCmJHOXdiV1Z1ZENCRFFURkZNRU1HQTFVRUN3dzhibWwwYVhOb1gyMWhiR2h2ZEhKaFFHNXBkR2x6YUUxQ1VDNW0KYVc5ekxYSnZkWFJsY2k1b2IyMWxJQ2hPYVhScGMyZ2dUV0ZzYUc5MGNtRXBNVXd3U2dZRFZRUURERU50YTJObApjblFnYm1sMGFYTm9YMjFoYkdodmRISmhRRzVwZEdsemFFMUNVQzVtYVc5ekxYSnZkWFJsY2k1b2IyMWxJQ2hPCmFYUnBjMmdnVFdGc2FHOTBjbUVwTUlJQm9qQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FZOEFNSUlCaWdLQ0FZRUEKdnM2ZTZwM3RUM0plb3lrRHRCbFlTendHTEZIVGdiMjIvVWpqUWp3T3Z4NktPZHNrUmxDRHBIR1pEU2NiUHlOWQpCUWNMTzU5Si9XTDZSYXYvTk9qcU1tYjE0WkRzR0NSV29ROTFESnZQZVE2Uk12TkFhWVo4bExRbkxUY2dFUXdUCngyajZyM1JCT3phd1FKVk5oWHlIWDZKTWRxRUd1bGlNWTd2ZXlMSHpaQVRsOWRQYjFlejN4Y2dkdWd5dFkzN20KdVhkRWlpTjNNbXl6RlZCWEQ1cUg2T2w3OTIyYmMxZFlscGNoQyt2S3lKUDdvRkZ0a0owVU5tYi9IVTlKYllwSwpvbmRaWmx3WGlPR05DNEt3MWJOcmxtWGdrVkpDVFZ3S2dhRC9wVTNFRnM1bll0UzIybTZTdUcrMExuOTNjdjVwCmlDRU1pWDZGNThRZzVvUXNmdWs4N1owMFBMTmE1MVI2aFRqYVhERllOMUFUYTFBdi9vMjNaeWJjZGV3VFhyZlEKZTc0ZitSZEcvSVEwZk90K0NiSUk0NDk5eDR4RHlGazlQcWdXNlFuc1N6TTZOTTJ6SVprQWMxM2pjaW5yU0pYWQpZMWVnQTNFb25oamNkb0QvR3p2YmNCV0xUOVZFYkRPazV1SUFDMjR4aFhXU1J4TkFsTCtFaXZOTTdDNmMrckNQCkFnTUJBQUdqUlRCRE1BNEdBMVVkRHdFQi93UUVBd0lDQkRBU0JnTlZIUk1CQWY4RUNEQUdBUUgvQWdFQU1CMEcKQTFVZERnUVdCQlNDNDlLaEhDN2RZTWFvcFkwTk1YS2JTRWtieGpBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVlFQQpEd3UzNG1WSFdXdzh2UjRZa3dYL1hrN2hHSVkyMmUyajdWc00xRzlrWU1ZMGgra1JnckRCcXBGOGo5VGFBWkZFCkNKNXdmSmdMRHRGOVZNYnRWWW1xQXJrUTQ0Z2lobldSbFU3bUwzbGl0YnRMRmp0eGFVRmVnUXgwZzBkTkZIWkMKbzNBNy8vY0lKZVJSeTNKWFQ0anJGRXgxRjh5cHIxYU5INVR6elcrbmpRRzNMZ0lSUWtLRmN1RTVEYmsrQ1lEaQpjdC9LYkJVaXJ2eFBnWkxLd3BrVEh4UnJGdTZIQU11M21laUppdEdPbjN3T0NYa1BqbVkwV2hFaWNZRlRoWHZ5ClBheDhjK2Rqem43RnY4RVdwS3Q3a3h0WnFSdnRZWG5IeW9INFJKRjRlSUdSSVNSZElpVGZsUVpWNTkrQ3dqU0EKbE1KNEo1eUo1alRkV1pDVlVMLzdXSGtrRWRnVzZMM3F3YjU1WS9XY0ZYNHNoNHpWekZ1UDl6bHcyNm1hNGVZUwplZmRhN1VrYkRzT0k3Q3grSkQydTFXTGlhYzVwNHhiK2RtcVFtWFMvaGVOSkpvMGRrY3BGcGpOVS8rRStydnphCm0zYlR4ZzM5Z1BTV3NueC8wcjFqMU1pY3c0Tnl4UVVacXFFT0dSVDNkRVNHNXhGOVIyemFqTzJ2bjNjZStmY3MKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    cert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVxakNDQXhLZ0F3SUJBZ0lSQU5TSzBlS0RIRjVPY25HcTNzOGJXNEV3RFFZSktvWklodmNOQVFFTEJRQXcKZ2JVeEhqQWNCZ05WQkFvVEZXMXJZMlZ5ZENCa1pYWmxiRzl3YldWdWRDQkRRVEZGTUVNR0ExVUVDd3c4Ym1sMAphWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHphRTFDVUM1bWFXOXpMWEp2ZFhSbGNpNW9iMjFsSUNoT2FYUnBjMmdnClRXRnNhRzkwY21FcE1Vd3dTZ1lEVlFRRERFTnRhMk5sY25RZ2JtbDBhWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHoKYUUxQ1VDNW1hVzl6TFhKdmRYUmxjaTVvYjIxbElDaE9hWFJwYzJnZ1RXRnNhRzkwY21FcE1CNFhEVEU1TURZdwpNVEF3TURBd01Gb1hEVE13TURjeU9EQXpNVGd4TlZvd2NERW5NQ1VHQTFVRUNoTWViV3RqWlhKMElHUmxkbVZzCmIzQnRaVzUwSUdObGNuUnBabWxqWVhSbE1VVXdRd1lEVlFRTEREeHVhWFJwYzJoZmJXRnNhRzkwY21GQWJtbDAKYVhOb1RVSlFMbVpwYjNNdGNtOTFkR1Z5TG1odmJXVWdLRTVwZEdsemFDQk5ZV3hvYjNSeVlTa3dnZ0VpTUEwRwpDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRREMwQzdjdXJWaVVtVHlBWDY0ZGpOKzc4Y1hJaFdTClg0dVgzbGYzQThFcWg2dWlDQ1I4TUdjYnZWanlGS3lpYWdwM1ZHd1ludEhWTzM2dGYwZGlTVm55TStBYjIrS2cKZjZ3N1BLaXNPd2VnUVl2T0FoZXZsRm9rUGEvU0RaTDF5RXUyaHZ3ZTQ4TVU1WDAvcEhOUlE5dDhmajRvT3dJOAppN1BXaXhNd0h3eFBCOTdRcGNMbERMSkZqRzJaRy9tNmR1QWI0Uk96bHhOZnRtZXBKR05WODVxZDBENXNPc25nCk1jZzNreVBKR3RrNnpGTkhMbkpuVG8yS01yN0ZxUjB4dTF2NXpwWDhHY1U0SEE1RVhyR2phOWsrRnhKU0ZBRnMKZENWOFdDbFgzWm1qbkNMa01zTlUrclZHUU0vZDhvM3NTdDNYcnYwVXMrTHpObSttVDhoemp0VVRBZ01CQUFHagplVEIzTUE0R0ExVWREd0VCL3dRRUF3SUZvREFUQmdOVkhTVUVEREFLQmdnckJnRUZCUWNEQVRBTUJnTlZIUk1CCkFmOEVBakFBTUI4R0ExVWRJd1FZTUJhQUZJTGowcUVjTHQxZ3hxaWxqUTB4Y3B0SVNSdkdNQ0VHQTFVZEVRUWEKTUJpQ0ZuUmxibUZ1ZEMxdmJtVXVaWGhoYlhCc1pTNWpiMjB3RFFZSktvWklodmNOQVFFTEJRQURnZ0dCQUUvNApxZ2tDYnJKRnBGOVhWbm5FT0xKcTZvOFdMUHo5emJUYU9jRnMyc08wdXVseVpNR2t5MUl2ZmxnNmprNjVOaHlXCk50SzJlRko1Wlg3SnVjeVZ3R3pPOEM2dllrTEd5Ym1ZNXRxSTAxa0huNmFqTDNQVXBOUEdXYnlFeGU0d2xSckIKRHkwYTVQclcxKzRRZGlkSFlPM0dWM2g3MWJJVUowWTM4cUR4WDRQSHdiVy9IZ1VpTnArSXc3d1N3RS9LdmRKaQp2Q0ZFdmZTNW8vdDF0VnhFM3owTVJGeGV2eWk4Vmhjc2UwdHlEcTNzRnV3UFExZGE2dXZrQXFVcnNMcm5McHl4Cm15WWJlbkx0SUdqMFlkdmlZTTNWWkFqaXRYSkNYNEE5R3IrSHIxdVRBdm9ZQmEwRWo1U1dqcElMd0liSkZUbzkKd0ZIa0EvMHhIMG1OeDUzK3poQUMrdTJBWm4zUnBFZitXbVBTS0h0QUV4SHRGSEs4dk1zY09VM2lmZTlacDc3ZgpnQU9nbEdTUlc4VllVSzd1ODVEdTI3RHl0a2cwOUFRUkxGL3BhVGZTUHlHZmJmWlFXM2pKWWpoRW5MVERaRE9ECnJ3c0lPZXhZV2NHcUwzYjg4UHdjcllvTlRzUVQrRXhaQk1POTNQRkg5SXFPUjBpdmVVQUpGZmpxQkM4cCtBPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    key: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRREMwQzdjdXJWaVVtVHkKQVg2NGRqTis3OGNYSWhXU1g0dVgzbGYzQThFcWg2dWlDQ1I4TUdjYnZWanlGS3lpYWdwM1ZHd1ludEhWTzM2dApmMGRpU1ZueU0rQWIyK0tnZjZ3N1BLaXNPd2VnUVl2T0FoZXZsRm9rUGEvU0RaTDF5RXUyaHZ3ZTQ4TVU1WDAvCnBITlJROXQ4Zmo0b093SThpN1BXaXhNd0h3eFBCOTdRcGNMbERMSkZqRzJaRy9tNmR1QWI0Uk96bHhOZnRtZXAKSkdOVjg1cWQwRDVzT3NuZ01jZzNreVBKR3RrNnpGTkhMbkpuVG8yS01yN0ZxUjB4dTF2NXpwWDhHY1U0SEE1RQpYckdqYTlrK0Z4SlNGQUZzZENWOFdDbFgzWm1qbkNMa01zTlUrclZHUU0vZDhvM3NTdDNYcnYwVXMrTHpObSttClQ4aHpqdFVUQWdNQkFBRUNnZ0VCQUxzT3l2Q0hGc05oK2l1bDQ5ZWJKN2NxNVRBQk9sVmlDTmU2Vnh5SUxtSjQKQXdXQ2JBWVRNKzRlMGRrZ29PTVNqeG9scGVXK0doMTFFeDNrcU5abk9FYW9LUGlYR2ZTaW91MytRTGVmdHFMYQpUVE55THV3WXRyVTF4aTBiZTVFazBnNWhicFQ2ZmNjQzFGRFh4eUt3MVgra2VHcUl2bzBFVjVvWjBFTFVqUzBUCjVKVFdWdEthZjM2aDhQUkFGMmt3bEkvMWRxUXJtaHBqaE9DOG9BNmZxWkpVc2pUNDFQVG8rbUcrUGozelhFa1EKVURpUU5xaERvYXE1dWtCNzZRMklxQ2RVb1BHeWJnS2RTUjRsdXExcHNHZ2ZBa0QxSFc0T0s5R3RmZHJZOFdvYwpjb2hKSDVLTmYyTFI4bUpTVm9rZjlRUU9mL3VNY3NMSnFaWHFXbWZEU1FFQ2dZRUEybGZITWw5anBDUGNrT0MyCnRmTHJQTFFKeW9KYlE0QnM4cXc1UXVHZzFWUzExakpjUVk3UVlEOHM2NWhnMHl3UkhPTHhuRm84c1ZxVjk5MlEKUUlmcWx1c2R0ZTNqVi95NmVFWXFEd29QdFJWdmUxQVNtMTlNMGZ6OGhZR091b296Rk9mR25WUlJzRm1zTnFucQpUbm5rMDI5b2NwMzJaeHZPR0h5RFpGVGQxVHNDZ1lFQTVHbUhYSHFHU2RqcEExdlZQTmVYR25RYUsvNGc3ODZpCkxaRU95d0tjbldDSzdnTW1CcnQ4YStXdTdPVjV6WkxnM0trN1J2SzdQK2swRjNKamkvcGo2bXRUMDl1ZnJjZnUKSWhYMzNyck1ia29NWDFzVmhLR0RJTnVlT3E2MG4yMjJBVVl2K1J1ZW1NN1VLNk9UNVVBT3NuUTg1QjRKWXNqbwpNVWhQU1V0Sm9na0NnWUVBcndrVFhXUnZBcFRsS3hlYUlYNmQ2a29DVjEvdFBjM2tpUjVid1N3VHZURnRuRXMrCi9pYzVFUTlVT1lJc2pOMlUwbTEwZDMwM2pvNHFEMHlGYWRZTHovU29Hc0tjTUZzZ09XODJKRnhTZno2eDRrOHMKdTNYSXBjYUR3WnM5Q25uanZXeVpJbU1JSWJHaGh5anI5d0ZzMmJ0RUppNVA3QlMwUVpqLzFCemN3U1VDZ1lBVQp1OU9TdkhpR0tZOTFRNWZHcnhkRFNuaTV0NWJMemVrQTArTVE0SXJRNmx1U0lXMEpQV21jN2J1RU80eGo4Y3BCCm5ZY0krSzJ3cm4yUkIwd3IvNjJrTU52cUpreUhYTmVyOW15S3BsQTZUclJ5ejNUVGxrbXQ2T0dqR0FyRFVoVXMKWm0raVlEUjBVSW9IOEJCVHhnM1BleWV2MlY0bXZtLzlVVUFKT2pGVDZRS0JnRUpSVEZna3YreFFITjdCN1EyUApjdkpuWDJOd3cwQXY5NDNTMisxRVlrSFRFN3RkSWJQSDAySmtOMmh3bVB0cWdOaGtXN1RUdmZEZzhaVW9MOVlXCnJnTnR1VzFXTUlpNzdnVTNYQkJqZnRsQ3pWVlVLemowa0FsUlBlTElSZW5IeEZBNVluYlphS2FpaUZ3dkdicDMKSFdrZU9TS1A2OXRTWkozTG5MS21hTGt4Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K
+  kind: Secret
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"cacert":"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZQRENDQTZTZ0F3SUJBZ0lSQVBIMGlLWDFoVG9NZ3ZmNk1Pbk1NUFF3RFFZSktvWklodmNOQVFFTEJRQXcKZ2JVeEhqQWNCZ05WQkFvVEZXMXJZMlZ5ZENCa1pYWmxiRzl3YldWdWRDQkRRVEZGTUVNR0ExVUVDd3c4Ym1sMAphWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHphRTFDVUM1bWFXOXpMWEp2ZFhSbGNpNW9iMjFsSUNoT2FYUnBjMmdnClRXRnNhRzkwY21FcE1Vd3dTZ1lEVlFRRERFTnRhMk5sY25RZ2JtbDBhWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHoKYUUxQ1VDNW1hVzl6TFhKdmRYUmxjaTVvYjIxbElDaE9hWFJwYzJnZ1RXRnNhRzkwY21FcE1CNFhEVEl3TURjeQpPREF6TVRNeU1Wb1hEVE13TURjeU9EQXpNVE15TVZvd2diVXhIakFjQmdOVkJBb1RGVzFyWTJWeWRDQmtaWFpsCmJHOXdiV1Z1ZENCRFFURkZNRU1HQTFVRUN3dzhibWwwYVhOb1gyMWhiR2h2ZEhKaFFHNXBkR2x6YUUxQ1VDNW0KYVc5ekxYSnZkWFJsY2k1b2IyMWxJQ2hPYVhScGMyZ2dUV0ZzYUc5MGNtRXBNVXd3U2dZRFZRUURERU50YTJObApjblFnYm1sMGFYTm9YMjFoYkdodmRISmhRRzVwZEdsemFFMUNVQzVtYVc5ekxYSnZkWFJsY2k1b2IyMWxJQ2hPCmFYUnBjMmdnVFdGc2FHOTBjbUVwTUlJQm9qQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FZOEFNSUlCaWdLQ0FZRUEKdnM2ZTZwM3RUM0plb3lrRHRCbFlTendHTEZIVGdiMjIvVWpqUWp3T3Z4NktPZHNrUmxDRHBIR1pEU2NiUHlOWQpCUWNMTzU5Si9XTDZSYXYvTk9qcU1tYjE0WkRzR0NSV29ROTFESnZQZVE2Uk12TkFhWVo4bExRbkxUY2dFUXdUCngyajZyM1JCT3phd1FKVk5oWHlIWDZKTWRxRUd1bGlNWTd2ZXlMSHpaQVRsOWRQYjFlejN4Y2dkdWd5dFkzN20KdVhkRWlpTjNNbXl6RlZCWEQ1cUg2T2w3OTIyYmMxZFlscGNoQyt2S3lKUDdvRkZ0a0owVU5tYi9IVTlKYllwSwpvbmRaWmx3WGlPR05DNEt3MWJOcmxtWGdrVkpDVFZ3S2dhRC9wVTNFRnM1bll0UzIybTZTdUcrMExuOTNjdjVwCmlDRU1pWDZGNThRZzVvUXNmdWs4N1owMFBMTmE1MVI2aFRqYVhERllOMUFUYTFBdi9vMjNaeWJjZGV3VFhyZlEKZTc0ZitSZEcvSVEwZk90K0NiSUk0NDk5eDR4RHlGazlQcWdXNlFuc1N6TTZOTTJ6SVprQWMxM2pjaW5yU0pYWQpZMWVnQTNFb25oamNkb0QvR3p2YmNCV0xUOVZFYkRPazV1SUFDMjR4aFhXU1J4TkFsTCtFaXZOTTdDNmMrckNQCkFnTUJBQUdqUlRCRE1BNEdBMVVkRHdFQi93UUVBd0lDQkRBU0JnTlZIUk1CQWY4RUNEQUdBUUgvQWdFQU1CMEcKQTFVZERnUVdCQlNDNDlLaEhDN2RZTWFvcFkwTk1YS2JTRWtieGpBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVlFQQpEd3UzNG1WSFdXdzh2UjRZa3dYL1hrN2hHSVkyMmUyajdWc00xRzlrWU1ZMGgra1JnckRCcXBGOGo5VGFBWkZFCkNKNXdmSmdMRHRGOVZNYnRWWW1xQXJrUTQ0Z2lobldSbFU3bUwzbGl0YnRMRmp0eGFVRmVnUXgwZzBkTkZIWkMKbzNBNy8vY0lKZVJSeTNKWFQ0anJGRXgxRjh5cHIxYU5INVR6elcrbmpRRzNMZ0lSUWtLRmN1RTVEYmsrQ1lEaQpjdC9LYkJVaXJ2eFBnWkxLd3BrVEh4UnJGdTZIQU11M21laUppdEdPbjN3T0NYa1BqbVkwV2hFaWNZRlRoWHZ5ClBheDhjK2Rqem43RnY4RVdwS3Q3a3h0WnFSdnRZWG5IeW9INFJKRjRlSUdSSVNSZElpVGZsUVpWNTkrQ3dqU0EKbE1KNEo1eUo1alRkV1pDVlVMLzdXSGtrRWRnVzZMM3F3YjU1WS9XY0ZYNHNoNHpWekZ1UDl6bHcyNm1hNGVZUwplZmRhN1VrYkRzT0k3Q3grSkQydTFXTGlhYzVwNHhiK2RtcVFtWFMvaGVOSkpvMGRrY3BGcGpOVS8rRStydnphCm0zYlR4ZzM5Z1BTV3NueC8wcjFqMU1pY3c0Tnl4UVVacXFFT0dSVDNkRVNHNXhGOVIyemFqTzJ2bjNjZStmY3MKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=","cert":"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVxakNDQXhLZ0F3SUJBZ0lSQU5TSzBlS0RIRjVPY25HcTNzOGJXNEV3RFFZSktvWklodmNOQVFFTEJRQXcKZ2JVeEhqQWNCZ05WQkFvVEZXMXJZMlZ5ZENCa1pYWmxiRzl3YldWdWRDQkRRVEZGTUVNR0ExVUVDd3c4Ym1sMAphWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHphRTFDVUM1bWFXOXpMWEp2ZFhSbGNpNW9iMjFsSUNoT2FYUnBjMmdnClRXRnNhRzkwY21FcE1Vd3dTZ1lEVlFRRERFTnRhMk5sY25RZ2JtbDBhWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHoKYUUxQ1VDNW1hVzl6TFhKdmRYUmxjaTVvYjIxbElDaE9hWFJwYzJnZ1RXRnNhRzkwY21FcE1CNFhEVEU1TURZdwpNVEF3TURBd01Gb1hEVE13TURjeU9EQXpNVGd4TlZvd2NERW5NQ1VHQTFVRUNoTWViV3RqWlhKMElHUmxkbVZzCmIzQnRaVzUwSUdObGNuUnBabWxqWVhSbE1VVXdRd1lEVlFRTEREeHVhWFJwYzJoZmJXRnNhRzkwY21GQWJtbDAKYVhOb1RVSlFMbVpwYjNNdGNtOTFkR1Z5TG1odmJXVWdLRTVwZEdsemFDQk5ZV3hvYjNSeVlTa3dnZ0VpTUEwRwpDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRREMwQzdjdXJWaVVtVHlBWDY0ZGpOKzc4Y1hJaFdTClg0dVgzbGYzQThFcWg2dWlDQ1I4TUdjYnZWanlGS3lpYWdwM1ZHd1ludEhWTzM2dGYwZGlTVm55TStBYjIrS2cKZjZ3N1BLaXNPd2VnUVl2T0FoZXZsRm9rUGEvU0RaTDF5RXUyaHZ3ZTQ4TVU1WDAvcEhOUlE5dDhmajRvT3dJOAppN1BXaXhNd0h3eFBCOTdRcGNMbERMSkZqRzJaRy9tNmR1QWI0Uk96bHhOZnRtZXBKR05WODVxZDBENXNPc25nCk1jZzNreVBKR3RrNnpGTkhMbkpuVG8yS01yN0ZxUjB4dTF2NXpwWDhHY1U0SEE1RVhyR2phOWsrRnhKU0ZBRnMKZENWOFdDbFgzWm1qbkNMa01zTlUrclZHUU0vZDhvM3NTdDNYcnYwVXMrTHpObSttVDhoemp0VVRBZ01CQUFHagplVEIzTUE0R0ExVWREd0VCL3dRRUF3SUZvREFUQmdOVkhTVUVEREFLQmdnckJnRUZCUWNEQVRBTUJnTlZIUk1CCkFmOEVBakFBTUI4R0ExVWRJd1FZTUJhQUZJTGowcUVjTHQxZ3hxaWxqUTB4Y3B0SVNSdkdNQ0VHQTFVZEVRUWEKTUJpQ0ZuUmxibUZ1ZEMxdmJtVXVaWGhoYlhCc1pTNWpiMjB3RFFZSktvWklodmNOQVFFTEJRQURnZ0dCQUUvNApxZ2tDYnJKRnBGOVhWbm5FT0xKcTZvOFdMUHo5emJUYU9jRnMyc08wdXVseVpNR2t5MUl2ZmxnNmprNjVOaHlXCk50SzJlRko1Wlg3SnVjeVZ3R3pPOEM2dllrTEd5Ym1ZNXRxSTAxa0huNmFqTDNQVXBOUEdXYnlFeGU0d2xSckIKRHkwYTVQclcxKzRRZGlkSFlPM0dWM2g3MWJJVUowWTM4cUR4WDRQSHdiVy9IZ1VpTnArSXc3d1N3RS9LdmRKaQp2Q0ZFdmZTNW8vdDF0VnhFM3owTVJGeGV2eWk4Vmhjc2UwdHlEcTNzRnV3UFExZGE2dXZrQXFVcnNMcm5McHl4Cm15WWJlbkx0SUdqMFlkdmlZTTNWWkFqaXRYSkNYNEE5R3IrSHIxdVRBdm9ZQmEwRWo1U1dqcElMd0liSkZUbzkKd0ZIa0EvMHhIMG1OeDUzK3poQUMrdTJBWm4zUnBFZitXbVBTS0h0QUV4SHRGSEs4dk1zY09VM2lmZTlacDc3ZgpnQU9nbEdTUlc4VllVSzd1ODVEdTI3RHl0a2cwOUFRUkxGL3BhVGZTUHlHZmJmWlFXM2pKWWpoRW5MVERaRE9ECnJ3c0lPZXhZV2NHcUwzYjg4UHdjcllvTlRzUVQrRXhaQk1POTNQRkg5SXFPUjBpdmVVQUpGZmpxQkM4cCtBPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=","key":"LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRREMwQzdjdXJWaVVtVHkKQVg2NGRqTis3OGNYSWhXU1g0dVgzbGYzQThFcWg2dWlDQ1I4TUdjYnZWanlGS3lpYWdwM1ZHd1ludEhWTzM2dApmMGRpU1ZueU0rQWIyK0tnZjZ3N1BLaXNPd2VnUVl2T0FoZXZsRm9rUGEvU0RaTDF5RXUyaHZ3ZTQ4TVU1WDAvCnBITlJROXQ4Zmo0b093SThpN1BXaXhNd0h3eFBCOTdRcGNMbERMSkZqRzJaRy9tNmR1QWI0Uk96bHhOZnRtZXAKSkdOVjg1cWQwRDVzT3NuZ01jZzNreVBKR3RrNnpGTkhMbkpuVG8yS01yN0ZxUjB4dTF2NXpwWDhHY1U0SEE1RQpYckdqYTlrK0Z4SlNGQUZzZENWOFdDbFgzWm1qbkNMa01zTlUrclZHUU0vZDhvM3NTdDNYcnYwVXMrTHpObSttClQ4aHpqdFVUQWdNQkFBRUNnZ0VCQUxzT3l2Q0hGc05oK2l1bDQ5ZWJKN2NxNVRBQk9sVmlDTmU2Vnh5SUxtSjQKQXdXQ2JBWVRNKzRlMGRrZ29PTVNqeG9scGVXK0doMTFFeDNrcU5abk9FYW9LUGlYR2ZTaW91MytRTGVmdHFMYQpUVE55THV3WXRyVTF4aTBiZTVFazBnNWhicFQ2ZmNjQzFGRFh4eUt3MVgra2VHcUl2bzBFVjVvWjBFTFVqUzBUCjVKVFdWdEthZjM2aDhQUkFGMmt3bEkvMWRxUXJtaHBqaE9DOG9BNmZxWkpVc2pUNDFQVG8rbUcrUGozelhFa1EKVURpUU5xaERvYXE1dWtCNzZRMklxQ2RVb1BHeWJnS2RTUjRsdXExcHNHZ2ZBa0QxSFc0T0s5R3RmZHJZOFdvYwpjb2hKSDVLTmYyTFI4bUpTVm9rZjlRUU9mL3VNY3NMSnFaWHFXbWZEU1FFQ2dZRUEybGZITWw5anBDUGNrT0MyCnRmTHJQTFFKeW9KYlE0QnM4cXc1UXVHZzFWUzExakpjUVk3UVlEOHM2NWhnMHl3UkhPTHhuRm84c1ZxVjk5MlEKUUlmcWx1c2R0ZTNqVi95NmVFWXFEd29QdFJWdmUxQVNtMTlNMGZ6OGhZR091b296Rk9mR25WUlJzRm1zTnFucQpUbm5rMDI5b2NwMzJaeHZPR0h5RFpGVGQxVHNDZ1lFQTVHbUhYSHFHU2RqcEExdlZQTmVYR25RYUsvNGc3ODZpCkxaRU95d0tjbldDSzdnTW1CcnQ4YStXdTdPVjV6WkxnM0trN1J2SzdQK2swRjNKamkvcGo2bXRUMDl1ZnJjZnUKSWhYMzNyck1ia29NWDFzVmhLR0RJTnVlT3E2MG4yMjJBVVl2K1J1ZW1NN1VLNk9UNVVBT3NuUTg1QjRKWXNqbwpNVWhQU1V0Sm9na0NnWUVBcndrVFhXUnZBcFRsS3hlYUlYNmQ2a29DVjEvdFBjM2tpUjVid1N3VHZURnRuRXMrCi9pYzVFUTlVT1lJc2pOMlUwbTEwZDMwM2pvNHFEMHlGYWRZTHovU29Hc0tjTUZzZ09XODJKRnhTZno2eDRrOHMKdTNYSXBjYUR3WnM5Q25uanZXeVpJbU1JSWJHaGh5anI5d0ZzMmJ0RUppNVA3QlMwUVpqLzFCemN3U1VDZ1lBVQp1OU9TdkhpR0tZOTFRNWZHcnhkRFNuaTV0NWJMemVrQTArTVE0SXJRNmx1U0lXMEpQV21jN2J1RU80eGo4Y3BCCm5ZY0krSzJ3cm4yUkIwd3IvNjJrTU52cUpreUhYTmVyOW15S3BsQTZUclJ5ejNUVGxrbXQ2T0dqR0FyRFVoVXMKWm0raVlEUjBVSW9IOEJCVHhnM1BleWV2MlY0bXZtLzlVVUFKT2pGVDZRS0JnRUpSVEZna3YreFFITjdCN1EyUApjdkpuWDJOd3cwQXY5NDNTMisxRVlrSFRFN3RkSWJQSDAySmtOMmh3bVB0cWdOaGtXN1RUdmZEZzhaVW9MOVlXCnJnTnR1VzFXTUlpNzdnVTNYQkJqZnRsQ3pWVlVLemowa0FsUlBlTElSZW5IeEZBNVluYlphS2FpaUZ3dkdicDMKSFdrZU9TS1A2OXRTWkozTG5MS21hTGt4Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K"},"kind":"Secret","metadata":{"annotations":{},"labels":{"owner":"tenant-one"},"name":"ingressgateway-certs","namespace":"tenant-one"},"type":"generic"}
+    labels:
+      owner: tenant-one
+    name: ingressgateway-certs
+    namespace: tenant-one
+  type: generic
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one"},"name":"istio-ingressgateway","namespace":"tenant-one"},"spec":{"externalTrafficPolicy":"Cluster","ports":[{"name":"status-port","port":15020,"protocol":"TCP","targetPort":15020},{"name":"http2","port":80,"protocol":"TCP","targetPort":8080},{"name":"https","port":443,"protocol":"TCP","targetPort":8443},{"name":"tcp","port":31400,"protocol":"TCP","targetPort":31400},{"name":"tls","port":15443,"protocol":"TCP","targetPort":15443}],"selector":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one"},"sessionAffinity":"None","type":"LoadBalancer"}}
+    labels:
+      app: istio-ingressgateway
+      event: kubecon-eu-2020
+      istio: ingressgateway
+      owner: tenant-one
+    name: istio-ingressgateway
+    namespace: tenant-one
+  spec:
+    externalTrafficPolicy: Cluster
+    ports:
+    - name: status-port
+      port: 15020
+      protocol: TCP
+      targetPort: 15020
+    - name: http2
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 8443
+    - name: tcp
+      port: 31400
+      protocol: TCP
+      targetPort: 31400
+    - name: tls
+      port: 15443
+      protocol: TCP
+      targetPort: 15443
+    selector:
+      app: istio-ingressgateway
+      event: kubecon-eu-2020
+      istio: ingressgateway
+      owner: tenant-one
+    sessionAffinity: None
+    type: LoadBalancer
+- apiVersion: policy/v1beta1
+  kind: PodDisruptionBudget
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policy/v1beta1","kind":"PodDisruptionBudget","metadata":{"annotations":{},"generation":1,"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one","release":"istio"},"name":"istio-ingressgateway","namespace":"tenant-one"},"spec":{"minAvailable":1,"selector":{"matchLabels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one","release":"istio"}}}}
+    generation: 1
+    labels:
+      app: istio-ingressgateway
+      event: kubecon-eu-2020
+      istio: ingressgateway
+      owner: tenant-one
+      release: istio
+    name: istio-ingressgateway
+    namespace: tenant-one
+  spec:
+    minAvailable: 1
+    selector:
+      matchLabels:
+        app: istio-ingressgateway
+        event: kubecon-eu-2020
+        istio: ingressgateway
+        owner: tenant-one
+        release: istio
+- apiVersion: networking.istio.io/v1alpha3
+  kind: Gateway
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.istio.io/v1alpha3","kind":"Gateway","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-one"},"name":"bookinfo-gateway","namespace":"tenant-one"},"spec":{"selector":{"istio":"ingressgateway"},"servers":[{"hosts":["tenant-one.example.com"],"port":{"name":"http","number":80,"protocol":"HTTP"}},{"hosts":["tenant-one.example.com"],"port":{"name":"https","number":443,"protocol":"HTTPS"},"tls":{"credentialName":"ingressgateway-certs","mode":"MUTUAL"}}]}}
+    labels:
+      event: kubecon-eu-2020
+      owner: tenant-one
+    name: bookinfo-gateway
+    namespace: tenant-one
+  spec:
+    selector:
+      istio: ingressgateway
+    servers:
+    - hosts:
+      - tenant-one.example.com
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+    - hosts:
+      - tenant-one.example.com
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        credentialName: ingressgateway-certs
+        mode: MUTUAL
+- apiVersion: networking.istio.io/v1alpha3
+  kind: VirtualService
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-one"},"name":"bookinfo","namespace":"tenant-one"},"spec":{"gateways":["bookinfo-gateway"],"hosts":["tenant-one.example.com"],"http":[{"match":[{"uri":{"exact":"/productpage"}},{"uri":{"prefix":"/static"}},{"uri":{"exact":"/login"}},{"uri":{"exact":"/logout"}},{"uri":{"prefix":"/api/v1/products"}}],"route":[{"destination":{"host":"productpage","port":{"number":9080}}}]}]}}
+    labels:
+      event: kubecon-eu-2020
+      owner: tenant-one
+    name: bookinfo
+    namespace: tenant-one
+  spec:
+    gateways:
+    - bookinfo-gateway
+    hosts:
+    - tenant-one.example.com
+    http:
+    - match:
+      - uri:
+          exact: /productpage
+      - uri:
+          prefix: /static
+      - uri:
+          exact: /login
+      - uri:
+          exact: /logout
+      - uri:
+          prefix: /api/v1/products
+      route:
+      - destination:
+          host: productpage
+          port:
+            number: 9080
+kind: List
+metadata: {}
