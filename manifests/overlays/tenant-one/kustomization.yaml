@@ -1,5 +1,0 @@
-resources:
-- ../../base
-commonAnnotations:
-  owner: tenant-one
-namespace: tenant-one

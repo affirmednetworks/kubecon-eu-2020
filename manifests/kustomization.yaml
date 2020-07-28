@@ -1,5 +1,0 @@
-commonLabels:
-  event: kubecon-eu-2020 
-resources:
-- tenant-one
-- tenant-two
