@@ -41,3 +41,27 @@ kubectl create ns tenant-two
 kubectl label namespace tenant-two istio-injection=enabled
 kubectl apply -k tenant-two
 ```
+
+## Resolve istio-ingressgateway ClusterIP
+
+### tenant-one
+
+```bash
+CLUSTER_IP=$(kubectl -n tenant-one get service istio-ingressgateway -o jsonpath='{.spec.clusterIP}'
+```
+
+### tenant-two
+
+```bash
+CLUSTER_IP=$(kubectl -n tenant-two get service istio-ingressgateway -o jsonpath='{.spec.clusterIP}'
+```
+
+## Send requests
+
+Example:
+
+```bash
+curl -v --resolve "tenant-one.example.com:443:$CLUSTER_IP" --cacert /etc/certs/cacert --
+cert /etc/certs/t1-cert.pem  --key /etc/certs/t1-key.pem  https://tenant-one.example.com:443/p
+roductpage
+```

@@ -3,8 +3,23 @@ kind: Kustomization
 
 commonLabels:
     event: kubecon-eu-2020
-    
+
+namespace: user
+
 resources:
 - deployment.yaml 
 - service.yaml
 - serviceaccount.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+  - name: client-certs
+    files:
+      - secrets/cacert
+      - secrets/tenant-one/t1-cert.pem
+      - secrets/tenant-one/t1-key.pem
+      - secrets/tenant-two/t2-key.pem
+      - secrets/tenant-two/t2-cert.pem
+    type: generic

@@ -21,8 +21,13 @@ spec:
         volumeMounts:
         - mountPath: /etc/sleep/tls
           name: secret-volume
+        - mountPath: /etc/certs
+          name: client-certs
       volumes:
       - name: secret-volume
         secret:
           secretName: sleep-secret
           optional: true
+      - name: client-certs
+        secret:
+          secretName: client-certs  
