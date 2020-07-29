@@ -72,7 +72,7 @@ items:
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-two"},"name":"istio-ingressgateway","namespace":"tenant-two"},"spec":{"externalTrafficPolicy":"Cluster","ports":[{"name":"status-port","port":15020,"protocol":"TCP","targetPort":15020},{"name":"http2","port":80,"protocol":"TCP","targetPort":8080},{"name":"https","port":443,"protocol":"TCP","targetPort":8443},{"name":"tcp","port":31400,"protocol":"TCP","targetPort":31400},{"name":"tls","port":15443,"protocol":"TCP","targetPort":15443}],"selector":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-two"},"sessionAffinity":"None","type":"LoadBalancer"}}
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-two"},"name":"istio-ingressgateway","namespace":"tenant-two"},"spec":{"ports":[{"name":"status-port","port":15020,"targetPort":15020},{"name":"http2","port":80,"targetPort":80},{"name":"https","port":443},{"name":"kiali","port":15029,"targetPort":15029},{"name":"prometheus","port":15030,"targetPort":15030},{"name":"grafana","port":15031,"targetPort":15031},{"name":"tracing","port":15032,"targetPort":15032},{"name":"tcp","port":31400,"targetPort":31400},{"name":"tls","port":15443,"targetPort":15443}],"selector":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-two"},"type":"LoadBalancer"}}
     labels:
       app: istio-ingressgateway
       event: kubecon-eu-2020
@@ -81,49 +81,241 @@ items:
     name: istio-ingressgateway
     namespace: tenant-two
   spec:
-    externalTrafficPolicy: Cluster
     ports:
     - name: status-port
       port: 15020
-      protocol: TCP
       targetPort: 15020
     - name: http2
       port: 80
-      protocol: TCP
-      targetPort: 8080
+      targetPort: 80
     - name: https
       port: 443
-      protocol: TCP
-      targetPort: 8443
+    - name: kiali
+      port: 15029
+      targetPort: 15029
+    - name: prometheus
+      port: 15030
+      targetPort: 15030
+    - name: grafana
+      port: 15031
+      targetPort: 15031
+    - name: tracing
+      port: 15032
+      targetPort: 15032
     - name: tcp
       port: 31400
-      protocol: TCP
       targetPort: 31400
     - name: tls
       port: 15443
-      protocol: TCP
       targetPort: 15443
     selector:
       app: istio-ingressgateway
       event: kubecon-eu-2020
       istio: ingressgateway
       owner: tenant-two
-    sessionAffinity: None
     type: LoadBalancer
-- apiVersion: policy/v1beta1
-  kind: PodDisruptionBudget
+- apiVersion: apps/v1
+  kind: Deployment
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"policy/v1beta1","kind":"PodDisruptionBudget","metadata":{"annotations":{},"generation":1,"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-two","release":"istio"},"name":"istio-ingressgateway","namespace":"tenant-two"},"spec":{"minAvailable":1,"selector":{"matchLabels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-two","release":"istio"}}}}
-    generation: 1
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-two"},"name":"istio-ingressgateway","namespace":"tenant-two"},"spec":{"selector":{"matchLabels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-two"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"false"},"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-two"}},"spec":{"containers":[{"args":["proxy","router","--domain","$(POD_NAMESPACE).svc.cluster.local","--proxyLogLevel=warning","--proxyComponentLogLevel=misc:error","--log_output_level=default:info","--drainDuration","45s","--parentShutdownDuration","1m0s","--connectTimeout","10s","--serviceCluster","istio-ingressgateway","--zipkinAddress","zipkin.istio-system:9411","--proxyAdminPort","15000","--statusPort","15020","--controlPlaneAuthPolicy","NONE","--discoveryAddress","istio-pilot.istio-system.svc:15012","--trust-domain=cluster.local"],"env":[{"name":"JWT_POLICY","value":"first-party-jwt"},{"name":"PILOT_CERT_PROVIDER","value":"istiod"},{"name":"ISTIO_META_USER_SDS","value":"true"},{"name":"CA_ADDR","value":"istio-pilot.istio-system.svc:15012"},{"name":"NODE_NAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"spec.nodeName"}}},{"name":"POD_NAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.name"}}},{"name":"POD_NAMESPACE","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.namespace"}}},{"name":"INSTANCE_IP","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"status.podIP"}}},{"name":"HOST_IP","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"status.hostIP"}}},{"name":"SERVICE_ACCOUNT","valueFrom":{"fieldRef":{"fieldPath":"spec.serviceAccountName"}}},{"name":"ISTIO_META_WORKLOAD_NAME","value":"istio-ingressgateway"},{"name":"ISTIO_META_OWNER","value":"kubernetes://apis/apps/v1/namespaces/tenant-two/deployments/istio-ingressgateway"},{"name":"ISTIO_META_MESH_ID","value":"cluster.local"},{"name":"ISTIO_AUTO_MTLS_ENABLED","value":"true"},{"name":"ISTIO_META_POD_NAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.name"}}},{"name":"ISTIO_META_CONFIG_NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}},{"name":"ISTIO_META_ROUTER_MODE","value":"sni-dnat"},{"name":"ISTIO_META_CLUSTER_ID","value":"Kubernetes"}],"image":"docker.io/istio/proxyv2:1.5.0","imagePullPolicy":"IfNotPresent","name":"istio-proxy","ports":[{"containerPort":15020},{"containerPort":80},{"containerPort":443},{"containerPort":15029},{"containerPort":15030},{"containerPort":15031},{"containerPort":15032},{"containerPort":31400},{"containerPort":15443},{"containerPort":15011},{"containerPort":8060},{"containerPort":853},{"containerPort":15090,"name":"http-envoy-prom","protocol":"TCP"}],"readinessProbe":{"failureThreshold":30,"httpGet":{"path":"/healthz/ready","port":15020,"scheme":"HTTP"},"initialDelaySeconds":1,"periodSeconds":2,"successThreshold":1,"timeoutSeconds":1},"resources":{"limits":{"cpu":"2000m","memory":"1024Mi"},"requests":{"cpu":"10m","memory":"40Mi"}},"volumeMounts":[{"mountPath":"/var/run/secrets/istio","name":"istiod-ca-cert"},{"mountPath":"/var/run/ingress_gateway","name":"ingressgatewaysdsudspath"},{"mountPath":"/etc/istio/pod","name":"podinfo"},{"mountPath":"/etc/istio/ingressgateway-certs","name":"ingressgateway-certs","readOnly":true},{"mountPath":"/etc/istio/ingressgateway-ca-certs","name":"ingressgateway-ca-certs","readOnly":true}]}],"serviceAccountName":"istio-ingressgateway-service-account","volumes":[{"configMap":{"name":"istio-ca-root-cert"},"name":"istiod-ca-cert"},{"downwardAPI":{"items":[{"fieldRef":{"fieldPath":"metadata.labels"},"path":"labels"},{"fieldRef":{"fieldPath":"metadata.annotations"},"path":"annotations"}]},"name":"podinfo"},{"emptyDir":{},"name":"ingressgatewaysdsudspath"},{"name":"ingressgateway-certs","secret":{"optional":true,"secretName":"istio-ingressgateway-certs"}},{"name":"ingressgateway-ca-certs","secret":{"optional":true,"secretName":"istio-ingressgateway-ca-certs"}}]}}}}
     labels:
       app: istio-ingressgateway
       event: kubecon-eu-2020
       istio: ingressgateway
       owner: tenant-two
-      release: istio
     name: istio-ingressgateway
+    namespace: tenant-two
+  spec:
+    selector:
+      matchLabels:
+        app: istio-ingressgateway
+        event: kubecon-eu-2020
+        istio: ingressgateway
+        owner: tenant-two
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "false"
+        labels:
+          app: istio-ingressgateway
+          event: kubecon-eu-2020
+          istio: ingressgateway
+          owner: tenant-two
+      spec:
+        containers:
+        - args:
+          - proxy
+          - router
+          - --domain
+          - $(POD_NAMESPACE).svc.cluster.local
+          - --proxyLogLevel=warning
+          - --proxyComponentLogLevel=misc:error
+          - --log_output_level=default:info
+          - --drainDuration
+          - 45s
+          - --parentShutdownDuration
+          - 1m0s
+          - --connectTimeout
+          - 10s
+          - --serviceCluster
+          - istio-ingressgateway
+          - --zipkinAddress
+          - zipkin.istio-system:9411
+          - --proxyAdminPort
+          - "15000"
+          - --statusPort
+          - "15020"
+          - --controlPlaneAuthPolicy
+          - NONE
+          - --discoveryAddress
+          - istio-pilot.istio-system.svc:15012
+          - --trust-domain=cluster.local
+          env:
+          - name: JWT_POLICY
+            value: first-party-jwt
+          - name: PILOT_CERT_PROVIDER
+            value: istiod
+          - name: ISTIO_META_USER_SDS
+            value: "true"
+          - name: CA_ADDR
+            value: istio-pilot.istio-system.svc:15012
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: spec.nodeName
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: INSTANCE_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.podIP
+          - name: HOST_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          - name: SERVICE_ACCOUNT
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.serviceAccountName
+          - name: ISTIO_META_WORKLOAD_NAME
+            value: istio-ingressgateway
+          - name: ISTIO_META_OWNER
+            value: kubernetes://apis/apps/v1/namespaces/tenant-two/deployments/istio-ingressgateway
+          - name: ISTIO_META_MESH_ID
+            value: cluster.local
+          - name: ISTIO_AUTO_MTLS_ENABLED
+            value: "true"
+          - name: ISTIO_META_POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: ISTIO_META_CONFIG_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: ISTIO_META_ROUTER_MODE
+            value: sni-dnat
+          - name: ISTIO_META_CLUSTER_ID
+            value: Kubernetes
+          image: docker.io/istio/proxyv2:1.5.0
+          imagePullPolicy: IfNotPresent
+          name: istio-proxy
+          ports:
+          - containerPort: 15020
+          - containerPort: 80
+          - containerPort: 443
+          - containerPort: 15029
+          - containerPort: 15030
+          - containerPort: 15031
+          - containerPort: 15032
+          - containerPort: 31400
+          - containerPort: 15443
+          - containerPort: 15011
+          - containerPort: 8060
+          - containerPort: 853
+          - containerPort: 15090
+            name: http-envoy-prom
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /healthz/ready
+              port: 15020
+              scheme: HTTP
+            initialDelaySeconds: 1
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 1024Mi
+            requests:
+              cpu: 10m
+              memory: 40Mi
+          volumeMounts:
+          - mountPath: /var/run/secrets/istio
+            name: istiod-ca-cert
+          - mountPath: /var/run/ingress_gateway
+            name: ingressgatewaysdsudspath
+          - mountPath: /etc/istio/pod
+            name: podinfo
+          - mountPath: /etc/istio/ingressgateway-certs
+            name: ingressgateway-certs
+            readOnly: true
+          - mountPath: /etc/istio/ingressgateway-ca-certs
+            name: ingressgateway-ca-certs
+            readOnly: true
+        serviceAccountName: istio-ingressgateway-service-account
+        volumes:
+        - configMap:
+            name: istio-ca-root-cert
+          name: istiod-ca-cert
+        - downwardAPI:
+            items:
+            - fieldRef:
+                fieldPath: metadata.labels
+              path: labels
+            - fieldRef:
+                fieldPath: metadata.annotations
+              path: annotations
+          name: podinfo
+        - emptyDir: {}
+          name: ingressgatewaysdsudspath
+        - name: ingressgateway-certs
+          secret:
+            optional: true
+            secretName: istio-ingressgateway-certs
+        - name: ingressgateway-ca-certs
+          secret:
+            optional: true
+            secretName: istio-ingressgateway-ca-certs
+- apiVersion: policy/v1beta1
+  kind: PodDisruptionBudget
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policy/v1beta1","kind":"PodDisruptionBudget","metadata":{"annotations":{},"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-two"},"name":"ingressgateway","namespace":"tenant-two"},"spec":{"minAvailable":1,"selector":{"matchLabels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-two"}}}}
+    labels:
+      app: istio-ingressgateway
+      event: kubecon-eu-2020
+      istio: ingressgateway
+      owner: tenant-two
+    name: ingressgateway
     namespace: tenant-two
   spec:
     minAvailable: 1
@@ -133,13 +325,12 @@ items:
         event: kubecon-eu-2020
         istio: ingressgateway
         owner: tenant-two
-        release: istio
 - apiVersion: networking.istio.io/v1alpha3
   kind: Gateway
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"networking.istio.io/v1alpha3","kind":"Gateway","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-two"},"name":"bookinfo-gateway","namespace":"tenant-two"},"spec":{"selector":{"istio":"ingressgateway"},"servers":[{"hosts":["tenant-two.example.com"],"port":{"name":"http","number":80,"protocol":"HTTP"}},{"hosts":["tenant-two.example.com"],"port":{"name":"https","number":443,"protocol":"HTTPS"},"tls":{"credentialName":"ingressgateway-certs","mode":"MUTUAL"}}]}}
+        {"apiVersion":"networking.istio.io/v1alpha3","kind":"Gateway","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-two"},"name":"bookinfo-gateway","namespace":"tenant-two"},"spec":{"selector":{"istio":"ingressgateway"},"servers":[{"hosts":["*"],"port":{"name":"http","number":80,"protocol":"HTTP"}}]}}
     labels:
       event: kubecon-eu-2020
       owner: tenant-two
@@ -150,26 +341,17 @@ items:
       istio: ingressgateway
     servers:
     - hosts:
-      - tenant-two.example.com
+      - '*'
       port:
         name: http
         number: 80
         protocol: HTTP
-    - hosts:
-      - tenant-two.example.com
-      port:
-        name: https
-        number: 443
-        protocol: HTTPS
-      tls:
-        credentialName: ingressgateway-certs
-        mode: MUTUAL
 - apiVersion: networking.istio.io/v1alpha3
   kind: VirtualService
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-two"},"name":"bookinfo","namespace":"tenant-two"},"spec":{"gateways":["bookinfo-gateway"],"hosts":["tenant-two.example.com"],"http":[{"match":[{"uri":{"exact":"/productpage"}},{"uri":{"prefix":"/static"}},{"uri":{"exact":"/login"}},{"uri":{"exact":"/logout"}},{"uri":{"prefix":"/api/v1/products"}}],"route":[{"destination":{"host":"productpage","port":{"number":9080}}}]}]}}
+        {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-two"},"name":"bookinfo","namespace":"tenant-two"},"spec":{"gateways":["bookinfo-gateway"],"hosts":["*"],"http":[{"match":[{"uri":{"exact":"/productpage"}},{"uri":{"prefix":"/static"}},{"uri":{"exact":"/login"}},{"uri":{"exact":"/logout"}},{"uri":{"prefix":"/api/v1/products"}}],"route":[{"destination":{"host":"productpage","port":{"number":9080}}}]}]}}
     labels:
       event: kubecon-eu-2020
       owner: tenant-two
@@ -179,7 +361,7 @@ items:
     gateways:
     - bookinfo-gateway
     hosts:
-    - tenant-two.example.com
+    - '*'
     http:
     - match:
       - uri:

@@ -6,24 +6,78 @@ items:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
         {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one"},"name":"istio-ingressgateway-service-account","namespace":"tenant-one"}}
+    creationTimestamp: "2020-07-29T02:11:31Z"
     labels:
       app: istio-ingressgateway
       event: kubecon-eu-2020
       istio: ingressgateway
       owner: tenant-one
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:secrets:
+          .: {}
+          k:{"name":"istio-ingressgateway-service-account-token-92mgd"}:
+            .: {}
+            f:name: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2020-07-29T02:11:31Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:event: {}
+            f:istio: {}
+            f:owner: {}
+      manager: kubectl
+      operation: Update
+      time: "2020-07-29T02:11:31Z"
     name: istio-ingressgateway-service-account
     namespace: tenant-one
+    resourceVersion: "4279"
+    selfLink: /api/v1/namespaces/tenant-one/serviceaccounts/istio-ingressgateway-service-account
+    uid: 6910b9de-4e68-4748-92c1-4600722319c2
+  secrets:
+  - name: istio-ingressgateway-service-account-token-92mgd
 - apiVersion: rbac.authorization.k8s.io/v1
   kind: Role
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
         {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"Role","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-one"},"name":"istio-ingressgateway-sds","namespace":"tenant-one"},"rules":[{"apiGroups":[""],"resources":["secrets"],"verbs":["get","watch","list"]}]}
+    creationTimestamp: "2020-07-29T02:11:31Z"
     labels:
       event: kubecon-eu-2020
       owner: tenant-one
+    managedFields:
+    - apiVersion: rbac.authorization.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:event: {}
+            f:owner: {}
+        f:rules: {}
+      manager: kubectl
+      operation: Update
+      time: "2020-07-29T02:11:31Z"
     name: istio-ingressgateway-sds
     namespace: tenant-one
+    resourceVersion: "4277"
+    selfLink: /apis/rbac.authorization.k8s.io/v1/namespaces/tenant-one/roles/istio-ingressgateway-sds
+    uid: bcfc046b-7726-4fa8-938e-4bc13c2193fb
   rules:
   - apiGroups:
     - ""
@@ -39,11 +93,35 @@ items:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
         {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"RoleBinding","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-one"},"name":"istio-ingressgateway-sds","namespace":"tenant-one"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"Role","name":"istio-ingressgateway-sds"},"subjects":[{"kind":"ServiceAccount","name":"istio-ingressgateway-service-account","namespace":"tenant-one"}]}
+    creationTimestamp: "2020-07-29T02:11:31Z"
     labels:
       event: kubecon-eu-2020
       owner: tenant-one
+    managedFields:
+    - apiVersion: rbac.authorization.k8s.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:event: {}
+            f:owner: {}
+        f:roleRef:
+          f:apiGroup: {}
+          f:kind: {}
+          f:name: {}
+        f:subjects: {}
+      manager: kubectl
+      operation: Update
+      time: "2020-07-29T02:11:31Z"
     name: istio-ingressgateway-sds
     namespace: tenant-one
+    resourceVersion: "4280"
+    selfLink: /apis/rbac.authorization.k8s.io/v1/namespaces/tenant-one/rolebindings/istio-ingressgateway-sds
+    uid: 4ca519d4-4ff0-4347-a9c2-32e27af837ef
   roleRef:
     apiGroup: rbac.authorization.k8s.io
     kind: Role
@@ -55,51 +133,188 @@ items:
 - apiVersion: v1
   data:
     cacert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZQRENDQTZTZ0F3SUJBZ0lSQVBIMGlLWDFoVG9NZ3ZmNk1Pbk1NUFF3RFFZSktvWklodmNOQVFFTEJRQXcKZ2JVeEhqQWNCZ05WQkFvVEZXMXJZMlZ5ZENCa1pYWmxiRzl3YldWdWRDQkRRVEZGTUVNR0ExVUVDd3c4Ym1sMAphWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHphRTFDVUM1bWFXOXpMWEp2ZFhSbGNpNW9iMjFsSUNoT2FYUnBjMmdnClRXRnNhRzkwY21FcE1Vd3dTZ1lEVlFRRERFTnRhMk5sY25RZ2JtbDBhWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHoKYUUxQ1VDNW1hVzl6TFhKdmRYUmxjaTVvYjIxbElDaE9hWFJwYzJnZ1RXRnNhRzkwY21FcE1CNFhEVEl3TURjeQpPREF6TVRNeU1Wb1hEVE13TURjeU9EQXpNVE15TVZvd2diVXhIakFjQmdOVkJBb1RGVzFyWTJWeWRDQmtaWFpsCmJHOXdiV1Z1ZENCRFFURkZNRU1HQTFVRUN3dzhibWwwYVhOb1gyMWhiR2h2ZEhKaFFHNXBkR2x6YUUxQ1VDNW0KYVc5ekxYSnZkWFJsY2k1b2IyMWxJQ2hPYVhScGMyZ2dUV0ZzYUc5MGNtRXBNVXd3U2dZRFZRUURERU50YTJObApjblFnYm1sMGFYTm9YMjFoYkdodmRISmhRRzVwZEdsemFFMUNVQzVtYVc5ekxYSnZkWFJsY2k1b2IyMWxJQ2hPCmFYUnBjMmdnVFdGc2FHOTBjbUVwTUlJQm9qQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FZOEFNSUlCaWdLQ0FZRUEKdnM2ZTZwM3RUM0plb3lrRHRCbFlTendHTEZIVGdiMjIvVWpqUWp3T3Z4NktPZHNrUmxDRHBIR1pEU2NiUHlOWQpCUWNMTzU5Si9XTDZSYXYvTk9qcU1tYjE0WkRzR0NSV29ROTFESnZQZVE2Uk12TkFhWVo4bExRbkxUY2dFUXdUCngyajZyM1JCT3phd1FKVk5oWHlIWDZKTWRxRUd1bGlNWTd2ZXlMSHpaQVRsOWRQYjFlejN4Y2dkdWd5dFkzN20KdVhkRWlpTjNNbXl6RlZCWEQ1cUg2T2w3OTIyYmMxZFlscGNoQyt2S3lKUDdvRkZ0a0owVU5tYi9IVTlKYllwSwpvbmRaWmx3WGlPR05DNEt3MWJOcmxtWGdrVkpDVFZ3S2dhRC9wVTNFRnM1bll0UzIybTZTdUcrMExuOTNjdjVwCmlDRU1pWDZGNThRZzVvUXNmdWs4N1owMFBMTmE1MVI2aFRqYVhERllOMUFUYTFBdi9vMjNaeWJjZGV3VFhyZlEKZTc0ZitSZEcvSVEwZk90K0NiSUk0NDk5eDR4RHlGazlQcWdXNlFuc1N6TTZOTTJ6SVprQWMxM2pjaW5yU0pYWQpZMWVnQTNFb25oamNkb0QvR3p2YmNCV0xUOVZFYkRPazV1SUFDMjR4aFhXU1J4TkFsTCtFaXZOTTdDNmMrckNQCkFnTUJBQUdqUlRCRE1BNEdBMVVkRHdFQi93UUVBd0lDQkRBU0JnTlZIUk1CQWY4RUNEQUdBUUgvQWdFQU1CMEcKQTFVZERnUVdCQlNDNDlLaEhDN2RZTWFvcFkwTk1YS2JTRWtieGpBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVlFQQpEd3UzNG1WSFdXdzh2UjRZa3dYL1hrN2hHSVkyMmUyajdWc00xRzlrWU1ZMGgra1JnckRCcXBGOGo5VGFBWkZFCkNKNXdmSmdMRHRGOVZNYnRWWW1xQXJrUTQ0Z2lobldSbFU3bUwzbGl0YnRMRmp0eGFVRmVnUXgwZzBkTkZIWkMKbzNBNy8vY0lKZVJSeTNKWFQ0anJGRXgxRjh5cHIxYU5INVR6elcrbmpRRzNMZ0lSUWtLRmN1RTVEYmsrQ1lEaQpjdC9LYkJVaXJ2eFBnWkxLd3BrVEh4UnJGdTZIQU11M21laUppdEdPbjN3T0NYa1BqbVkwV2hFaWNZRlRoWHZ5ClBheDhjK2Rqem43RnY4RVdwS3Q3a3h0WnFSdnRZWG5IeW9INFJKRjRlSUdSSVNSZElpVGZsUVpWNTkrQ3dqU0EKbE1KNEo1eUo1alRkV1pDVlVMLzdXSGtrRWRnVzZMM3F3YjU1WS9XY0ZYNHNoNHpWekZ1UDl6bHcyNm1hNGVZUwplZmRhN1VrYkRzT0k3Q3grSkQydTFXTGlhYzVwNHhiK2RtcVFtWFMvaGVOSkpvMGRrY3BGcGpOVS8rRStydnphCm0zYlR4ZzM5Z1BTV3NueC8wcjFqMU1pY3c0Tnl4UVVacXFFT0dSVDNkRVNHNXhGOVIyemFqTzJ2bjNjZStmY3MKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
-    cert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVxakNDQXhLZ0F3SUJBZ0lSQU5TSzBlS0RIRjVPY25HcTNzOGJXNEV3RFFZSktvWklodmNOQVFFTEJRQXcKZ2JVeEhqQWNCZ05WQkFvVEZXMXJZMlZ5ZENCa1pYWmxiRzl3YldWdWRDQkRRVEZGTUVNR0ExVUVDd3c4Ym1sMAphWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHphRTFDVUM1bWFXOXpMWEp2ZFhSbGNpNW9iMjFsSUNoT2FYUnBjMmdnClRXRnNhRzkwY21FcE1Vd3dTZ1lEVlFRRERFTnRhMk5sY25RZ2JtbDBhWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHoKYUUxQ1VDNW1hVzl6TFhKdmRYUmxjaTVvYjIxbElDaE9hWFJwYzJnZ1RXRnNhRzkwY21FcE1CNFhEVEU1TURZdwpNVEF3TURBd01Gb1hEVE13TURjeU9EQXpNVGd4TlZvd2NERW5NQ1VHQTFVRUNoTWViV3RqWlhKMElHUmxkbVZzCmIzQnRaVzUwSUdObGNuUnBabWxqWVhSbE1VVXdRd1lEVlFRTEREeHVhWFJwYzJoZmJXRnNhRzkwY21GQWJtbDAKYVhOb1RVSlFMbVpwYjNNdGNtOTFkR1Z5TG1odmJXVWdLRTVwZEdsemFDQk5ZV3hvYjNSeVlTa3dnZ0VpTUEwRwpDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRREMwQzdjdXJWaVVtVHlBWDY0ZGpOKzc4Y1hJaFdTClg0dVgzbGYzQThFcWg2dWlDQ1I4TUdjYnZWanlGS3lpYWdwM1ZHd1ludEhWTzM2dGYwZGlTVm55TStBYjIrS2cKZjZ3N1BLaXNPd2VnUVl2T0FoZXZsRm9rUGEvU0RaTDF5RXUyaHZ3ZTQ4TVU1WDAvcEhOUlE5dDhmajRvT3dJOAppN1BXaXhNd0h3eFBCOTdRcGNMbERMSkZqRzJaRy9tNmR1QWI0Uk96bHhOZnRtZXBKR05WODVxZDBENXNPc25nCk1jZzNreVBKR3RrNnpGTkhMbkpuVG8yS01yN0ZxUjB4dTF2NXpwWDhHY1U0SEE1RVhyR2phOWsrRnhKU0ZBRnMKZENWOFdDbFgzWm1qbkNMa01zTlUrclZHUU0vZDhvM3NTdDNYcnYwVXMrTHpObSttVDhoemp0VVRBZ01CQUFHagplVEIzTUE0R0ExVWREd0VCL3dRRUF3SUZvREFUQmdOVkhTVUVEREFLQmdnckJnRUZCUWNEQVRBTUJnTlZIUk1CCkFmOEVBakFBTUI4R0ExVWRJd1FZTUJhQUZJTGowcUVjTHQxZ3hxaWxqUTB4Y3B0SVNSdkdNQ0VHQTFVZEVRUWEKTUJpQ0ZuUmxibUZ1ZEMxdmJtVXVaWGhoYlhCc1pTNWpiMjB3RFFZSktvWklodmNOQVFFTEJRQURnZ0dCQUUvNApxZ2tDYnJKRnBGOVhWbm5FT0xKcTZvOFdMUHo5emJUYU9jRnMyc08wdXVseVpNR2t5MUl2ZmxnNmprNjVOaHlXCk50SzJlRko1Wlg3SnVjeVZ3R3pPOEM2dllrTEd5Ym1ZNXRxSTAxa0huNmFqTDNQVXBOUEdXYnlFeGU0d2xSckIKRHkwYTVQclcxKzRRZGlkSFlPM0dWM2g3MWJJVUowWTM4cUR4WDRQSHdiVy9IZ1VpTnArSXc3d1N3RS9LdmRKaQp2Q0ZFdmZTNW8vdDF0VnhFM3owTVJGeGV2eWk4Vmhjc2UwdHlEcTNzRnV3UFExZGE2dXZrQXFVcnNMcm5McHl4Cm15WWJlbkx0SUdqMFlkdmlZTTNWWkFqaXRYSkNYNEE5R3IrSHIxdVRBdm9ZQmEwRWo1U1dqcElMd0liSkZUbzkKd0ZIa0EvMHhIMG1OeDUzK3poQUMrdTJBWm4zUnBFZitXbVBTS0h0QUV4SHRGSEs4dk1zY09VM2lmZTlacDc3ZgpnQU9nbEdTUlc4VllVSzd1ODVEdTI3RHl0a2cwOUFRUkxGL3BhVGZTUHlHZmJmWlFXM2pKWWpoRW5MVERaRE9ECnJ3c0lPZXhZV2NHcUwzYjg4UHdjcllvTlRzUVQrRXhaQk1POTNQRkg5SXFPUjBpdmVVQUpGZmpxQkM4cCtBPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
-    key: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRREMwQzdjdXJWaVVtVHkKQVg2NGRqTis3OGNYSWhXU1g0dVgzbGYzQThFcWg2dWlDQ1I4TUdjYnZWanlGS3lpYWdwM1ZHd1ludEhWTzM2dApmMGRpU1ZueU0rQWIyK0tnZjZ3N1BLaXNPd2VnUVl2T0FoZXZsRm9rUGEvU0RaTDF5RXUyaHZ3ZTQ4TVU1WDAvCnBITlJROXQ4Zmo0b093SThpN1BXaXhNd0h3eFBCOTdRcGNMbERMSkZqRzJaRy9tNmR1QWI0Uk96bHhOZnRtZXAKSkdOVjg1cWQwRDVzT3NuZ01jZzNreVBKR3RrNnpGTkhMbkpuVG8yS01yN0ZxUjB4dTF2NXpwWDhHY1U0SEE1RQpYckdqYTlrK0Z4SlNGQUZzZENWOFdDbFgzWm1qbkNMa01zTlUrclZHUU0vZDhvM3NTdDNYcnYwVXMrTHpObSttClQ4aHpqdFVUQWdNQkFBRUNnZ0VCQUxzT3l2Q0hGc05oK2l1bDQ5ZWJKN2NxNVRBQk9sVmlDTmU2Vnh5SUxtSjQKQXdXQ2JBWVRNKzRlMGRrZ29PTVNqeG9scGVXK0doMTFFeDNrcU5abk9FYW9LUGlYR2ZTaW91MytRTGVmdHFMYQpUVE55THV3WXRyVTF4aTBiZTVFazBnNWhicFQ2ZmNjQzFGRFh4eUt3MVgra2VHcUl2bzBFVjVvWjBFTFVqUzBUCjVKVFdWdEthZjM2aDhQUkFGMmt3bEkvMWRxUXJtaHBqaE9DOG9BNmZxWkpVc2pUNDFQVG8rbUcrUGozelhFa1EKVURpUU5xaERvYXE1dWtCNzZRMklxQ2RVb1BHeWJnS2RTUjRsdXExcHNHZ2ZBa0QxSFc0T0s5R3RmZHJZOFdvYwpjb2hKSDVLTmYyTFI4bUpTVm9rZjlRUU9mL3VNY3NMSnFaWHFXbWZEU1FFQ2dZRUEybGZITWw5anBDUGNrT0MyCnRmTHJQTFFKeW9KYlE0QnM4cXc1UXVHZzFWUzExakpjUVk3UVlEOHM2NWhnMHl3UkhPTHhuRm84c1ZxVjk5MlEKUUlmcWx1c2R0ZTNqVi95NmVFWXFEd29QdFJWdmUxQVNtMTlNMGZ6OGhZR091b296Rk9mR25WUlJzRm1zTnFucQpUbm5rMDI5b2NwMzJaeHZPR0h5RFpGVGQxVHNDZ1lFQTVHbUhYSHFHU2RqcEExdlZQTmVYR25RYUsvNGc3ODZpCkxaRU95d0tjbldDSzdnTW1CcnQ4YStXdTdPVjV6WkxnM0trN1J2SzdQK2swRjNKamkvcGo2bXRUMDl1ZnJjZnUKSWhYMzNyck1ia29NWDFzVmhLR0RJTnVlT3E2MG4yMjJBVVl2K1J1ZW1NN1VLNk9UNVVBT3NuUTg1QjRKWXNqbwpNVWhQU1V0Sm9na0NnWUVBcndrVFhXUnZBcFRsS3hlYUlYNmQ2a29DVjEvdFBjM2tpUjVid1N3VHZURnRuRXMrCi9pYzVFUTlVT1lJc2pOMlUwbTEwZDMwM2pvNHFEMHlGYWRZTHovU29Hc0tjTUZzZ09XODJKRnhTZno2eDRrOHMKdTNYSXBjYUR3WnM5Q25uanZXeVpJbU1JSWJHaGh5anI5d0ZzMmJ0RUppNVA3QlMwUVpqLzFCemN3U1VDZ1lBVQp1OU9TdkhpR0tZOTFRNWZHcnhkRFNuaTV0NWJMemVrQTArTVE0SXJRNmx1U0lXMEpQV21jN2J1RU80eGo4Y3BCCm5ZY0krSzJ3cm4yUkIwd3IvNjJrTU52cUpreUhYTmVyOW15S3BsQTZUclJ5ejNUVGxrbXQ2T0dqR0FyRFVoVXMKWm0raVlEUjBVSW9IOEJCVHhnM1BleWV2MlY0bXZtLzlVVUFKT2pGVDZRS0JnRUpSVEZna3YreFFITjdCN1EyUApjdkpuWDJOd3cwQXY5NDNTMisxRVlrSFRFN3RkSWJQSDAySmtOMmh3bVB0cWdOaGtXN1RUdmZEZzhaVW9MOVlXCnJnTnR1VzFXTUlpNzdnVTNYQkJqZnRsQ3pWVlVLemowa0FsUlBlTElSZW5IeEZBNVluYlphS2FpaUZ3dkdicDMKSFdrZU9TS1A2OXRTWkozTG5MS21hTGt4Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K
+    cert: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVxakNDQXhLZ0F3SUJBZ0lSQUprcTlIODRNUWp6cSs0L0FkVmZKUjB3RFFZSktvWklodmNOQVFFTEJRQXcKZ2JVeEhqQWNCZ05WQkFvVEZXMXJZMlZ5ZENCa1pYWmxiRzl3YldWdWRDQkRRVEZGTUVNR0ExVUVDd3c4Ym1sMAphWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHphRTFDVUM1bWFXOXpMWEp2ZFhSbGNpNW9iMjFsSUNoT2FYUnBjMmdnClRXRnNhRzkwY21FcE1Vd3dTZ1lEVlFRRERFTnRhMk5sY25RZ2JtbDBhWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHoKYUUxQ1VDNW1hVzl6TFhKdmRYUmxjaTVvYjIxbElDaE9hWFJwYzJnZ1RXRnNhRzkwY21FcE1CNFhEVEU1TURZdwpNVEF3TURBd01Gb1hEVE13TURjeU9EQXpNVE15TWxvd2NERW5NQ1VHQTFVRUNoTWViV3RqWlhKMElHUmxkbVZzCmIzQnRaVzUwSUdObGNuUnBabWxqWVhSbE1VVXdRd1lEVlFRTEREeHVhWFJwYzJoZmJXRnNhRzkwY21GQWJtbDAKYVhOb1RVSlFMbVpwYjNNdGNtOTFkR1Z5TG1odmJXVWdLRTVwZEdsemFDQk5ZV3hvYjNSeVlTa3dnZ0VpTUEwRwpDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRQy9JS3h5NHRTZkpyNENVU1d2SWtIcnIrUk9aNUlaCmdzVGFiOXZpNDZxQktENUlzK1VJbFpWeDQzQ3cvbnQyaDdXcTlhZTJ0TmwzUVJvVDQ2aGlvQzV5R3diVHJTMlUKdjRneXVBNTF3V1kyV2ZMcTJ3anNEQWhHaEN5WFlpQTM1Vk9OcFJDSnkxcWNldi9URi9ibnJjQnVwY0pSeDZ4MwpXQlc0a1pnQ1JwUlN3cGdEanpMNUNaeHVEbVhjSVN0S0hVWTFXNHZwNzFvSjJ5TDZNMDcveEVTczJaekoxMjBxClNHTzZaOGRaZ2VNQXpTK2lhTGYyaUo2aUZYOHZyL3lHMkFXa2FwRk1DcUYxaW9FODhSS0M2ZG8vT1VzNHJscXUKNE1abHk1K2NqK1NSRGdOMDlDdHVOSEhVcVBuN2djSWx6OVVJRXdldkd6bDFTbTVjYmZQcVBiNDNBZ01CQUFHagplVEIzTUE0R0ExVWREd0VCL3dRRUF3SUZvREFUQmdOVkhTVUVEREFLQmdnckJnRUZCUWNEQVRBTUJnTlZIUk1CCkFmOEVBakFBTUI4R0ExVWRJd1FZTUJhQUZJTGowcUVjTHQxZ3hxaWxqUTB4Y3B0SVNSdkdNQ0VHQTFVZEVRUWEKTUJpQ0ZuUmxibUZ1ZEMxMGQyOHVaWGhoYlhCc1pTNWpiMjB3RFFZSktvWklodmNOQVFFTEJRQURnZ0dCQUdCLwpxSjZkYXNkTi94MlRLa252bzBZVi9Jd3dxK0g2VHFFb1FwS3B2TnBDL3VEaERkQWlvM3Q4R0NqUm9xWnRaWHJnCmltRis5Z2ZtVzFtSEhNdGVDSmYrTkFoVlFnbTF1OUttRjcrb21TZGJueFZsOEtaMXNHN0VCUTh4ZVpnWkdTWm8KUnR0M0NJVzFZeTJPK2pDN3FSOTBxVGFqSlRYRjBlTkxqUFZpQW5uSU14MkZXVUhaRWNvcTA4UUc0c1hMTlhuagpRTC9SS3UwbHNOQk9FdUl5cjdsRzZDTWROUW1oSnBndWtlSTUyakU1Q05sa1ppTGFJR1VjYmh4NXk3dHRacGNhCmQrU3VTWHlGQkV0N0F0Z2VEOHlCYnFvVFNJb2ROOFFUL1EzbmJwRllEYU9tczkvUFN2ZSs5MGdFUytjVzJnM0oKNDVUZEhmMXRKSjhiMCtFNjJXTjhHM0ZiZXFGMitwK0dOb0xTSGpIT3NxNlhwT2NHdVN3S3h5R3BacDlWTVNPUApxZ0pLeUtqekgzL3Z1MW5tSlY2MmZhVnlCemhlcnpzSzNNWkVJRWMxVUpZUFhLRHBkamhGVkhoaDA5WFYwQnlECjRwR3lSanFZSVV2VEFoYWdzSEJIUExtSWhNY2xwQmtPZXhiOFJYa3JrbTdmZlUwSVJSdHh5NmttcGIrR1lBPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    key: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2QUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktZd2dnU2lBZ0VBQW9JQkFRQy9JS3h5NHRTZkpyNEMKVVNXdklrSHJyK1JPWjVJWmdzVGFiOXZpNDZxQktENUlzK1VJbFpWeDQzQ3cvbnQyaDdXcTlhZTJ0TmwzUVJvVAo0Nmhpb0M1eUd3YlRyUzJVdjRneXVBNTF3V1kyV2ZMcTJ3anNEQWhHaEN5WFlpQTM1Vk9OcFJDSnkxcWNldi9UCkYvYm5yY0J1cGNKUng2eDNXQlc0a1pnQ1JwUlN3cGdEanpMNUNaeHVEbVhjSVN0S0hVWTFXNHZwNzFvSjJ5TDYKTTA3L3hFU3MyWnpKMTIwcVNHTzZaOGRaZ2VNQXpTK2lhTGYyaUo2aUZYOHZyL3lHMkFXa2FwRk1DcUYxaW9FOAo4UktDNmRvL09VczRybHF1NE1abHk1K2NqK1NSRGdOMDlDdHVOSEhVcVBuN2djSWx6OVVJRXdldkd6bDFTbTVjCmJmUHFQYjQzQWdNQkFBRUNnZ0VBRFlha2JhVDc0eDk4eHZFek40ZTNIcFRlRldaakFvY3NvMERUVU9WSHhjZ3gKVURmYTk1YU9jdmJqbk1NRnZjZXc1WjVvOWhjcVpMUW93a3VVT1JhWTh0NVN4MXcwSTVqQ2JNUjEwWU9VVmpoYgpacCtGckI3VjN4ZXZpQzhibEprWUpxZ04yWktZb1FaYllIY0x0QzJwdHFyb2E1MHo2V1pFYzBGcWZvNjhKSGNkCml4WEwvWlYzaFgzdkt1ZVYxZVExQnhTVDJqRy9pNXpCWnh3NEg2V1Q0dnkrRWdBcmYyZkM3Sk9pK0VXU2ppU0QKTDBTcmMrbEl2dTVTS0ZvZlc3NWxScUhRS0R5UEQ1cTZyTm56QkRlU3hOTEZPVzBBV1ZiRVlXSzJGcEJrVG96UgpBSWZHVU9uWHUzakNjOUM4a0loV3NqOHpaMWJ6amJ1aGYvNjJsdkxma1FLQmdRRDE0UHkzQnNEWWF6bEJDYmVRCjhyR1pYcVVIQnZTcU9iQXF3MGViZE9CS1ZyTlBleG5UWEpwT1BpRjdXUVo5RVQyYlVyeExyTndta2RUWkxxUkwKQS9oWGhHaGxTZ3RaTXBtZ2RXNEtwdmR3enZ1anFGWWJWUVVZeHVvdGVQMW1SMVRTc3p3YmlEKyt3NllnbTNNUwpzSHBmSjMxczE2YWlXUVZNREtOYko1dTFuUUtCZ1FERy9yc28ydWszR1BEdEkwbmhJY1I5aFF0Yi83UU16SUlmCm9jMHFPTVpySUZxUjBmdmp5akEzNk1KbktkbG9LTXVyZ1hmeVlldGJQVHZYYkRpam0vSkh2QXNSODlQVGtWVEUKaXNMMGlBUWhjTkYzcElpNDM5QWFQUU5CUm00RUNCYWJib3oyWEJFbEk4QXRJWjY1L0dkL09uTVNRYUlpRG9RWgpuSUNaL2taRTR3S0JnRUVUOVk5ejZDTGY3bDE2ZHUyVWJ0RkxMWjY0aHBWdmcyTXVJSXZTMlhLVGxBNGJaUEIrCmVCRHhmT2NxM3Y3SFMya0s4dStNcHhCR1ZQSE8ySWxLV2JiQVF1bGNPYmk0SGRWTWYzMnVSNXZDRFBSNkg2QkkKVm5zQ1d3VUNHdit4TFpBL0JFKzlOaklGa3JqYXJCQnNTVmRhR21adWhabyt1Wm94VmlOUVRuUTVBb0dBT3RuZgpGQ2daek5ldGVSUjBwd1pMakN1cXZseVRMUzNXVmZDT01xeHowZjdSaWtxbHlpcGp0RVU4S1RKeFA2TEJDVW5TCjVYWWNHdkd6SHZTOGszWnRZdFcwR0cwWitub0NyZFd6N29uRFh2aDBtb09vZzdSOVlTVW1MMG5iQTRvNDFXTU8KZ1ZXZEpIUzhReHlzU3FqaEd2bDRTcS9xZVZQOXNXMWRneTEyTHEwQ2dZQSs3WkkzTEc3QjdSR0w4TkI1NWxJbwpWelkvYjNjeGtub2VTS1pIRktsTUE3bmRLL0tXNElKMDFIR25OS3ZCSzVKZzRBRjlpZWJpbUl1NTJPVVpnWVAxCkNlSzVicUxoNFhRWXpRWHd5L2hQNTVUMnVmLytsSGJwRi9EUms1enVIR0RFU2ZhTTFTa1JxMmZhR2ZXcWdMcDIKd3l2V0poU3JTd0dhVTl3VlpDWjVrUT09Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K
   kind: Secret
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","data":{"cacert":"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZQRENDQTZTZ0F3SUJBZ0lSQVBIMGlLWDFoVG9NZ3ZmNk1Pbk1NUFF3RFFZSktvWklodmNOQVFFTEJRQXcKZ2JVeEhqQWNCZ05WQkFvVEZXMXJZMlZ5ZENCa1pYWmxiRzl3YldWdWRDQkRRVEZGTUVNR0ExVUVDd3c4Ym1sMAphWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHphRTFDVUM1bWFXOXpMWEp2ZFhSbGNpNW9iMjFsSUNoT2FYUnBjMmdnClRXRnNhRzkwY21FcE1Vd3dTZ1lEVlFRRERFTnRhMk5sY25RZ2JtbDBhWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHoKYUUxQ1VDNW1hVzl6TFhKdmRYUmxjaTVvYjIxbElDaE9hWFJwYzJnZ1RXRnNhRzkwY21FcE1CNFhEVEl3TURjeQpPREF6TVRNeU1Wb1hEVE13TURjeU9EQXpNVE15TVZvd2diVXhIakFjQmdOVkJBb1RGVzFyWTJWeWRDQmtaWFpsCmJHOXdiV1Z1ZENCRFFURkZNRU1HQTFVRUN3dzhibWwwYVhOb1gyMWhiR2h2ZEhKaFFHNXBkR2x6YUUxQ1VDNW0KYVc5ekxYSnZkWFJsY2k1b2IyMWxJQ2hPYVhScGMyZ2dUV0ZzYUc5MGNtRXBNVXd3U2dZRFZRUURERU50YTJObApjblFnYm1sMGFYTm9YMjFoYkdodmRISmhRRzVwZEdsemFFMUNVQzVtYVc5ekxYSnZkWFJsY2k1b2IyMWxJQ2hPCmFYUnBjMmdnVFdGc2FHOTBjbUVwTUlJQm9qQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FZOEFNSUlCaWdLQ0FZRUEKdnM2ZTZwM3RUM0plb3lrRHRCbFlTendHTEZIVGdiMjIvVWpqUWp3T3Z4NktPZHNrUmxDRHBIR1pEU2NiUHlOWQpCUWNMTzU5Si9XTDZSYXYvTk9qcU1tYjE0WkRzR0NSV29ROTFESnZQZVE2Uk12TkFhWVo4bExRbkxUY2dFUXdUCngyajZyM1JCT3phd1FKVk5oWHlIWDZKTWRxRUd1bGlNWTd2ZXlMSHpaQVRsOWRQYjFlejN4Y2dkdWd5dFkzN20KdVhkRWlpTjNNbXl6RlZCWEQ1cUg2T2w3OTIyYmMxZFlscGNoQyt2S3lKUDdvRkZ0a0owVU5tYi9IVTlKYllwSwpvbmRaWmx3WGlPR05DNEt3MWJOcmxtWGdrVkpDVFZ3S2dhRC9wVTNFRnM1bll0UzIybTZTdUcrMExuOTNjdjVwCmlDRU1pWDZGNThRZzVvUXNmdWs4N1owMFBMTmE1MVI2aFRqYVhERllOMUFUYTFBdi9vMjNaeWJjZGV3VFhyZlEKZTc0ZitSZEcvSVEwZk90K0NiSUk0NDk5eDR4RHlGazlQcWdXNlFuc1N6TTZOTTJ6SVprQWMxM2pjaW5yU0pYWQpZMWVnQTNFb25oamNkb0QvR3p2YmNCV0xUOVZFYkRPazV1SUFDMjR4aFhXU1J4TkFsTCtFaXZOTTdDNmMrckNQCkFnTUJBQUdqUlRCRE1BNEdBMVVkRHdFQi93UUVBd0lDQkRBU0JnTlZIUk1CQWY4RUNEQUdBUUgvQWdFQU1CMEcKQTFVZERnUVdCQlNDNDlLaEhDN2RZTWFvcFkwTk1YS2JTRWtieGpBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVlFQQpEd3UzNG1WSFdXdzh2UjRZa3dYL1hrN2hHSVkyMmUyajdWc00xRzlrWU1ZMGgra1JnckRCcXBGOGo5VGFBWkZFCkNKNXdmSmdMRHRGOVZNYnRWWW1xQXJrUTQ0Z2lobldSbFU3bUwzbGl0YnRMRmp0eGFVRmVnUXgwZzBkTkZIWkMKbzNBNy8vY0lKZVJSeTNKWFQ0anJGRXgxRjh5cHIxYU5INVR6elcrbmpRRzNMZ0lSUWtLRmN1RTVEYmsrQ1lEaQpjdC9LYkJVaXJ2eFBnWkxLd3BrVEh4UnJGdTZIQU11M21laUppdEdPbjN3T0NYa1BqbVkwV2hFaWNZRlRoWHZ5ClBheDhjK2Rqem43RnY4RVdwS3Q3a3h0WnFSdnRZWG5IeW9INFJKRjRlSUdSSVNSZElpVGZsUVpWNTkrQ3dqU0EKbE1KNEo1eUo1alRkV1pDVlVMLzdXSGtrRWRnVzZMM3F3YjU1WS9XY0ZYNHNoNHpWekZ1UDl6bHcyNm1hNGVZUwplZmRhN1VrYkRzT0k3Q3grSkQydTFXTGlhYzVwNHhiK2RtcVFtWFMvaGVOSkpvMGRrY3BGcGpOVS8rRStydnphCm0zYlR4ZzM5Z1BTV3NueC8wcjFqMU1pY3c0Tnl4UVVacXFFT0dSVDNkRVNHNXhGOVIyemFqTzJ2bjNjZStmY3MKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=","cert":"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVxakNDQXhLZ0F3SUJBZ0lSQU5TSzBlS0RIRjVPY25HcTNzOGJXNEV3RFFZSktvWklodmNOQVFFTEJRQXcKZ2JVeEhqQWNCZ05WQkFvVEZXMXJZMlZ5ZENCa1pYWmxiRzl3YldWdWRDQkRRVEZGTUVNR0ExVUVDd3c4Ym1sMAphWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHphRTFDVUM1bWFXOXpMWEp2ZFhSbGNpNW9iMjFsSUNoT2FYUnBjMmdnClRXRnNhRzkwY21FcE1Vd3dTZ1lEVlFRRERFTnRhMk5sY25RZ2JtbDBhWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHoKYUUxQ1VDNW1hVzl6TFhKdmRYUmxjaTVvYjIxbElDaE9hWFJwYzJnZ1RXRnNhRzkwY21FcE1CNFhEVEU1TURZdwpNVEF3TURBd01Gb1hEVE13TURjeU9EQXpNVGd4TlZvd2NERW5NQ1VHQTFVRUNoTWViV3RqWlhKMElHUmxkbVZzCmIzQnRaVzUwSUdObGNuUnBabWxqWVhSbE1VVXdRd1lEVlFRTEREeHVhWFJwYzJoZmJXRnNhRzkwY21GQWJtbDAKYVhOb1RVSlFMbVpwYjNNdGNtOTFkR1Z5TG1odmJXVWdLRTVwZEdsemFDQk5ZV3hvYjNSeVlTa3dnZ0VpTUEwRwpDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRREMwQzdjdXJWaVVtVHlBWDY0ZGpOKzc4Y1hJaFdTClg0dVgzbGYzQThFcWg2dWlDQ1I4TUdjYnZWanlGS3lpYWdwM1ZHd1ludEhWTzM2dGYwZGlTVm55TStBYjIrS2cKZjZ3N1BLaXNPd2VnUVl2T0FoZXZsRm9rUGEvU0RaTDF5RXUyaHZ3ZTQ4TVU1WDAvcEhOUlE5dDhmajRvT3dJOAppN1BXaXhNd0h3eFBCOTdRcGNMbERMSkZqRzJaRy9tNmR1QWI0Uk96bHhOZnRtZXBKR05WODVxZDBENXNPc25nCk1jZzNreVBKR3RrNnpGTkhMbkpuVG8yS01yN0ZxUjB4dTF2NXpwWDhHY1U0SEE1RVhyR2phOWsrRnhKU0ZBRnMKZENWOFdDbFgzWm1qbkNMa01zTlUrclZHUU0vZDhvM3NTdDNYcnYwVXMrTHpObSttVDhoemp0VVRBZ01CQUFHagplVEIzTUE0R0ExVWREd0VCL3dRRUF3SUZvREFUQmdOVkhTVUVEREFLQmdnckJnRUZCUWNEQVRBTUJnTlZIUk1CCkFmOEVBakFBTUI4R0ExVWRJd1FZTUJhQUZJTGowcUVjTHQxZ3hxaWxqUTB4Y3B0SVNSdkdNQ0VHQTFVZEVRUWEKTUJpQ0ZuUmxibUZ1ZEMxdmJtVXVaWGhoYlhCc1pTNWpiMjB3RFFZSktvWklodmNOQVFFTEJRQURnZ0dCQUUvNApxZ2tDYnJKRnBGOVhWbm5FT0xKcTZvOFdMUHo5emJUYU9jRnMyc08wdXVseVpNR2t5MUl2ZmxnNmprNjVOaHlXCk50SzJlRko1Wlg3SnVjeVZ3R3pPOEM2dllrTEd5Ym1ZNXRxSTAxa0huNmFqTDNQVXBOUEdXYnlFeGU0d2xSckIKRHkwYTVQclcxKzRRZGlkSFlPM0dWM2g3MWJJVUowWTM4cUR4WDRQSHdiVy9IZ1VpTnArSXc3d1N3RS9LdmRKaQp2Q0ZFdmZTNW8vdDF0VnhFM3owTVJGeGV2eWk4Vmhjc2UwdHlEcTNzRnV3UFExZGE2dXZrQXFVcnNMcm5McHl4Cm15WWJlbkx0SUdqMFlkdmlZTTNWWkFqaXRYSkNYNEE5R3IrSHIxdVRBdm9ZQmEwRWo1U1dqcElMd0liSkZUbzkKd0ZIa0EvMHhIMG1OeDUzK3poQUMrdTJBWm4zUnBFZitXbVBTS0h0QUV4SHRGSEs4dk1zY09VM2lmZTlacDc3ZgpnQU9nbEdTUlc4VllVSzd1ODVEdTI3RHl0a2cwOUFRUkxGL3BhVGZTUHlHZmJmWlFXM2pKWWpoRW5MVERaRE9ECnJ3c0lPZXhZV2NHcUwzYjg4UHdjcllvTlRzUVQrRXhaQk1POTNQRkg5SXFPUjBpdmVVQUpGZmpxQkM4cCtBPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=","key":"LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRREMwQzdjdXJWaVVtVHkKQVg2NGRqTis3OGNYSWhXU1g0dVgzbGYzQThFcWg2dWlDQ1I4TUdjYnZWanlGS3lpYWdwM1ZHd1ludEhWTzM2dApmMGRpU1ZueU0rQWIyK0tnZjZ3N1BLaXNPd2VnUVl2T0FoZXZsRm9rUGEvU0RaTDF5RXUyaHZ3ZTQ4TVU1WDAvCnBITlJROXQ4Zmo0b093SThpN1BXaXhNd0h3eFBCOTdRcGNMbERMSkZqRzJaRy9tNmR1QWI0Uk96bHhOZnRtZXAKSkdOVjg1cWQwRDVzT3NuZ01jZzNreVBKR3RrNnpGTkhMbkpuVG8yS01yN0ZxUjB4dTF2NXpwWDhHY1U0SEE1RQpYckdqYTlrK0Z4SlNGQUZzZENWOFdDbFgzWm1qbkNMa01zTlUrclZHUU0vZDhvM3NTdDNYcnYwVXMrTHpObSttClQ4aHpqdFVUQWdNQkFBRUNnZ0VCQUxzT3l2Q0hGc05oK2l1bDQ5ZWJKN2NxNVRBQk9sVmlDTmU2Vnh5SUxtSjQKQXdXQ2JBWVRNKzRlMGRrZ29PTVNqeG9scGVXK0doMTFFeDNrcU5abk9FYW9LUGlYR2ZTaW91MytRTGVmdHFMYQpUVE55THV3WXRyVTF4aTBiZTVFazBnNWhicFQ2ZmNjQzFGRFh4eUt3MVgra2VHcUl2bzBFVjVvWjBFTFVqUzBUCjVKVFdWdEthZjM2aDhQUkFGMmt3bEkvMWRxUXJtaHBqaE9DOG9BNmZxWkpVc2pUNDFQVG8rbUcrUGozelhFa1EKVURpUU5xaERvYXE1dWtCNzZRMklxQ2RVb1BHeWJnS2RTUjRsdXExcHNHZ2ZBa0QxSFc0T0s5R3RmZHJZOFdvYwpjb2hKSDVLTmYyTFI4bUpTVm9rZjlRUU9mL3VNY3NMSnFaWHFXbWZEU1FFQ2dZRUEybGZITWw5anBDUGNrT0MyCnRmTHJQTFFKeW9KYlE0QnM4cXc1UXVHZzFWUzExakpjUVk3UVlEOHM2NWhnMHl3UkhPTHhuRm84c1ZxVjk5MlEKUUlmcWx1c2R0ZTNqVi95NmVFWXFEd29QdFJWdmUxQVNtMTlNMGZ6OGhZR091b296Rk9mR25WUlJzRm1zTnFucQpUbm5rMDI5b2NwMzJaeHZPR0h5RFpGVGQxVHNDZ1lFQTVHbUhYSHFHU2RqcEExdlZQTmVYR25RYUsvNGc3ODZpCkxaRU95d0tjbldDSzdnTW1CcnQ4YStXdTdPVjV6WkxnM0trN1J2SzdQK2swRjNKamkvcGo2bXRUMDl1ZnJjZnUKSWhYMzNyck1ia29NWDFzVmhLR0RJTnVlT3E2MG4yMjJBVVl2K1J1ZW1NN1VLNk9UNVVBT3NuUTg1QjRKWXNqbwpNVWhQU1V0Sm9na0NnWUVBcndrVFhXUnZBcFRsS3hlYUlYNmQ2a29DVjEvdFBjM2tpUjVid1N3VHZURnRuRXMrCi9pYzVFUTlVT1lJc2pOMlUwbTEwZDMwM2pvNHFEMHlGYWRZTHovU29Hc0tjTUZzZ09XODJKRnhTZno2eDRrOHMKdTNYSXBjYUR3WnM5Q25uanZXeVpJbU1JSWJHaGh5anI5d0ZzMmJ0RUppNVA3QlMwUVpqLzFCemN3U1VDZ1lBVQp1OU9TdkhpR0tZOTFRNWZHcnhkRFNuaTV0NWJMemVrQTArTVE0SXJRNmx1U0lXMEpQV21jN2J1RU80eGo4Y3BCCm5ZY0krSzJ3cm4yUkIwd3IvNjJrTU52cUpreUhYTmVyOW15S3BsQTZUclJ5ejNUVGxrbXQ2T0dqR0FyRFVoVXMKWm0raVlEUjBVSW9IOEJCVHhnM1BleWV2MlY0bXZtLzlVVUFKT2pGVDZRS0JnRUpSVEZna3YreFFITjdCN1EyUApjdkpuWDJOd3cwQXY5NDNTMisxRVlrSFRFN3RkSWJQSDAySmtOMmh3bVB0cWdOaGtXN1RUdmZEZzhaVW9MOVlXCnJnTnR1VzFXTUlpNzdnVTNYQkJqZnRsQ3pWVlVLemowa0FsUlBlTElSZW5IeEZBNVluYlphS2FpaUZ3dkdicDMKSFdrZU9TS1A2OXRTWkozTG5MS21hTGt4Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K"},"kind":"Secret","metadata":{"annotations":{},"labels":{"owner":"tenant-one"},"name":"ingressgateway-certs","namespace":"tenant-one"},"type":"generic"}
+        {"apiVersion":"v1","data":{"cacert":"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZQRENDQTZTZ0F3SUJBZ0lSQVBIMGlLWDFoVG9NZ3ZmNk1Pbk1NUFF3RFFZSktvWklodmNOQVFFTEJRQXcKZ2JVeEhqQWNCZ05WQkFvVEZXMXJZMlZ5ZENCa1pYWmxiRzl3YldWdWRDQkRRVEZGTUVNR0ExVUVDd3c4Ym1sMAphWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHphRTFDVUM1bWFXOXpMWEp2ZFhSbGNpNW9iMjFsSUNoT2FYUnBjMmdnClRXRnNhRzkwY21FcE1Vd3dTZ1lEVlFRRERFTnRhMk5sY25RZ2JtbDBhWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHoKYUUxQ1VDNW1hVzl6TFhKdmRYUmxjaTVvYjIxbElDaE9hWFJwYzJnZ1RXRnNhRzkwY21FcE1CNFhEVEl3TURjeQpPREF6TVRNeU1Wb1hEVE13TURjeU9EQXpNVE15TVZvd2diVXhIakFjQmdOVkJBb1RGVzFyWTJWeWRDQmtaWFpsCmJHOXdiV1Z1ZENCRFFURkZNRU1HQTFVRUN3dzhibWwwYVhOb1gyMWhiR2h2ZEhKaFFHNXBkR2x6YUUxQ1VDNW0KYVc5ekxYSnZkWFJsY2k1b2IyMWxJQ2hPYVhScGMyZ2dUV0ZzYUc5MGNtRXBNVXd3U2dZRFZRUURERU50YTJObApjblFnYm1sMGFYTm9YMjFoYkdodmRISmhRRzVwZEdsemFFMUNVQzVtYVc5ekxYSnZkWFJsY2k1b2IyMWxJQ2hPCmFYUnBjMmdnVFdGc2FHOTBjbUVwTUlJQm9qQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FZOEFNSUlCaWdLQ0FZRUEKdnM2ZTZwM3RUM0plb3lrRHRCbFlTendHTEZIVGdiMjIvVWpqUWp3T3Z4NktPZHNrUmxDRHBIR1pEU2NiUHlOWQpCUWNMTzU5Si9XTDZSYXYvTk9qcU1tYjE0WkRzR0NSV29ROTFESnZQZVE2Uk12TkFhWVo4bExRbkxUY2dFUXdUCngyajZyM1JCT3phd1FKVk5oWHlIWDZKTWRxRUd1bGlNWTd2ZXlMSHpaQVRsOWRQYjFlejN4Y2dkdWd5dFkzN20KdVhkRWlpTjNNbXl6RlZCWEQ1cUg2T2w3OTIyYmMxZFlscGNoQyt2S3lKUDdvRkZ0a0owVU5tYi9IVTlKYllwSwpvbmRaWmx3WGlPR05DNEt3MWJOcmxtWGdrVkpDVFZ3S2dhRC9wVTNFRnM1bll0UzIybTZTdUcrMExuOTNjdjVwCmlDRU1pWDZGNThRZzVvUXNmdWs4N1owMFBMTmE1MVI2aFRqYVhERllOMUFUYTFBdi9vMjNaeWJjZGV3VFhyZlEKZTc0ZitSZEcvSVEwZk90K0NiSUk0NDk5eDR4RHlGazlQcWdXNlFuc1N6TTZOTTJ6SVprQWMxM2pjaW5yU0pYWQpZMWVnQTNFb25oamNkb0QvR3p2YmNCV0xUOVZFYkRPazV1SUFDMjR4aFhXU1J4TkFsTCtFaXZOTTdDNmMrckNQCkFnTUJBQUdqUlRCRE1BNEdBMVVkRHdFQi93UUVBd0lDQkRBU0JnTlZIUk1CQWY4RUNEQUdBUUgvQWdFQU1CMEcKQTFVZERnUVdCQlNDNDlLaEhDN2RZTWFvcFkwTk1YS2JTRWtieGpBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVlFQQpEd3UzNG1WSFdXdzh2UjRZa3dYL1hrN2hHSVkyMmUyajdWc00xRzlrWU1ZMGgra1JnckRCcXBGOGo5VGFBWkZFCkNKNXdmSmdMRHRGOVZNYnRWWW1xQXJrUTQ0Z2lobldSbFU3bUwzbGl0YnRMRmp0eGFVRmVnUXgwZzBkTkZIWkMKbzNBNy8vY0lKZVJSeTNKWFQ0anJGRXgxRjh5cHIxYU5INVR6elcrbmpRRzNMZ0lSUWtLRmN1RTVEYmsrQ1lEaQpjdC9LYkJVaXJ2eFBnWkxLd3BrVEh4UnJGdTZIQU11M21laUppdEdPbjN3T0NYa1BqbVkwV2hFaWNZRlRoWHZ5ClBheDhjK2Rqem43RnY4RVdwS3Q3a3h0WnFSdnRZWG5IeW9INFJKRjRlSUdSSVNSZElpVGZsUVpWNTkrQ3dqU0EKbE1KNEo1eUo1alRkV1pDVlVMLzdXSGtrRWRnVzZMM3F3YjU1WS9XY0ZYNHNoNHpWekZ1UDl6bHcyNm1hNGVZUwplZmRhN1VrYkRzT0k3Q3grSkQydTFXTGlhYzVwNHhiK2RtcVFtWFMvaGVOSkpvMGRrY3BGcGpOVS8rRStydnphCm0zYlR4ZzM5Z1BTV3NueC8wcjFqMU1pY3c0Tnl4UVVacXFFT0dSVDNkRVNHNXhGOVIyemFqTzJ2bjNjZStmY3MKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=","cert":"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUVxakNDQXhLZ0F3SUJBZ0lSQUprcTlIODRNUWp6cSs0L0FkVmZKUjB3RFFZSktvWklodmNOQVFFTEJRQXcKZ2JVeEhqQWNCZ05WQkFvVEZXMXJZMlZ5ZENCa1pYWmxiRzl3YldWdWRDQkRRVEZGTUVNR0ExVUVDd3c4Ym1sMAphWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHphRTFDVUM1bWFXOXpMWEp2ZFhSbGNpNW9iMjFsSUNoT2FYUnBjMmdnClRXRnNhRzkwY21FcE1Vd3dTZ1lEVlFRRERFTnRhMk5sY25RZ2JtbDBhWE5vWDIxaGJHaHZkSEpoUUc1cGRHbHoKYUUxQ1VDNW1hVzl6TFhKdmRYUmxjaTVvYjIxbElDaE9hWFJwYzJnZ1RXRnNhRzkwY21FcE1CNFhEVEU1TURZdwpNVEF3TURBd01Gb1hEVE13TURjeU9EQXpNVE15TWxvd2NERW5NQ1VHQTFVRUNoTWViV3RqWlhKMElHUmxkbVZzCmIzQnRaVzUwSUdObGNuUnBabWxqWVhSbE1VVXdRd1lEVlFRTEREeHVhWFJwYzJoZmJXRnNhRzkwY21GQWJtbDAKYVhOb1RVSlFMbVpwYjNNdGNtOTFkR1Z5TG1odmJXVWdLRTVwZEdsemFDQk5ZV3hvYjNSeVlTa3dnZ0VpTUEwRwpDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRQy9JS3h5NHRTZkpyNENVU1d2SWtIcnIrUk9aNUlaCmdzVGFiOXZpNDZxQktENUlzK1VJbFpWeDQzQ3cvbnQyaDdXcTlhZTJ0TmwzUVJvVDQ2aGlvQzV5R3diVHJTMlUKdjRneXVBNTF3V1kyV2ZMcTJ3anNEQWhHaEN5WFlpQTM1Vk9OcFJDSnkxcWNldi9URi9ibnJjQnVwY0pSeDZ4MwpXQlc0a1pnQ1JwUlN3cGdEanpMNUNaeHVEbVhjSVN0S0hVWTFXNHZwNzFvSjJ5TDZNMDcveEVTczJaekoxMjBxClNHTzZaOGRaZ2VNQXpTK2lhTGYyaUo2aUZYOHZyL3lHMkFXa2FwRk1DcUYxaW9FODhSS0M2ZG8vT1VzNHJscXUKNE1abHk1K2NqK1NSRGdOMDlDdHVOSEhVcVBuN2djSWx6OVVJRXdldkd6bDFTbTVjYmZQcVBiNDNBZ01CQUFHagplVEIzTUE0R0ExVWREd0VCL3dRRUF3SUZvREFUQmdOVkhTVUVEREFLQmdnckJnRUZCUWNEQVRBTUJnTlZIUk1CCkFmOEVBakFBTUI4R0ExVWRJd1FZTUJhQUZJTGowcUVjTHQxZ3hxaWxqUTB4Y3B0SVNSdkdNQ0VHQTFVZEVRUWEKTUJpQ0ZuUmxibUZ1ZEMxMGQyOHVaWGhoYlhCc1pTNWpiMjB3RFFZSktvWklodmNOQVFFTEJRQURnZ0dCQUdCLwpxSjZkYXNkTi94MlRLa252bzBZVi9Jd3dxK0g2VHFFb1FwS3B2TnBDL3VEaERkQWlvM3Q4R0NqUm9xWnRaWHJnCmltRis5Z2ZtVzFtSEhNdGVDSmYrTkFoVlFnbTF1OUttRjcrb21TZGJueFZsOEtaMXNHN0VCUTh4ZVpnWkdTWm8KUnR0M0NJVzFZeTJPK2pDN3FSOTBxVGFqSlRYRjBlTkxqUFZpQW5uSU14MkZXVUhaRWNvcTA4UUc0c1hMTlhuagpRTC9SS3UwbHNOQk9FdUl5cjdsRzZDTWROUW1oSnBndWtlSTUyakU1Q05sa1ppTGFJR1VjYmh4NXk3dHRacGNhCmQrU3VTWHlGQkV0N0F0Z2VEOHlCYnFvVFNJb2ROOFFUL1EzbmJwRllEYU9tczkvUFN2ZSs5MGdFUytjVzJnM0oKNDVUZEhmMXRKSjhiMCtFNjJXTjhHM0ZiZXFGMitwK0dOb0xTSGpIT3NxNlhwT2NHdVN3S3h5R3BacDlWTVNPUApxZ0pLeUtqekgzL3Z1MW5tSlY2MmZhVnlCemhlcnpzSzNNWkVJRWMxVUpZUFhLRHBkamhGVkhoaDA5WFYwQnlECjRwR3lSanFZSVV2VEFoYWdzSEJIUExtSWhNY2xwQmtPZXhiOFJYa3JrbTdmZlUwSVJSdHh5NmttcGIrR1lBPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=","key":"LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2QUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktZd2dnU2lBZ0VBQW9JQkFRQy9JS3h5NHRTZkpyNEMKVVNXdklrSHJyK1JPWjVJWmdzVGFiOXZpNDZxQktENUlzK1VJbFpWeDQzQ3cvbnQyaDdXcTlhZTJ0TmwzUVJvVAo0Nmhpb0M1eUd3YlRyUzJVdjRneXVBNTF3V1kyV2ZMcTJ3anNEQWhHaEN5WFlpQTM1Vk9OcFJDSnkxcWNldi9UCkYvYm5yY0J1cGNKUng2eDNXQlc0a1pnQ1JwUlN3cGdEanpMNUNaeHVEbVhjSVN0S0hVWTFXNHZwNzFvSjJ5TDYKTTA3L3hFU3MyWnpKMTIwcVNHTzZaOGRaZ2VNQXpTK2lhTGYyaUo2aUZYOHZyL3lHMkFXa2FwRk1DcUYxaW9FOAo4UktDNmRvL09VczRybHF1NE1abHk1K2NqK1NSRGdOMDlDdHVOSEhVcVBuN2djSWx6OVVJRXdldkd6bDFTbTVjCmJmUHFQYjQzQWdNQkFBRUNnZ0VBRFlha2JhVDc0eDk4eHZFek40ZTNIcFRlRldaakFvY3NvMERUVU9WSHhjZ3gKVURmYTk1YU9jdmJqbk1NRnZjZXc1WjVvOWhjcVpMUW93a3VVT1JhWTh0NVN4MXcwSTVqQ2JNUjEwWU9VVmpoYgpacCtGckI3VjN4ZXZpQzhibEprWUpxZ04yWktZb1FaYllIY0x0QzJwdHFyb2E1MHo2V1pFYzBGcWZvNjhKSGNkCml4WEwvWlYzaFgzdkt1ZVYxZVExQnhTVDJqRy9pNXpCWnh3NEg2V1Q0dnkrRWdBcmYyZkM3Sk9pK0VXU2ppU0QKTDBTcmMrbEl2dTVTS0ZvZlc3NWxScUhRS0R5UEQ1cTZyTm56QkRlU3hOTEZPVzBBV1ZiRVlXSzJGcEJrVG96UgpBSWZHVU9uWHUzakNjOUM4a0loV3NqOHpaMWJ6amJ1aGYvNjJsdkxma1FLQmdRRDE0UHkzQnNEWWF6bEJDYmVRCjhyR1pYcVVIQnZTcU9iQXF3MGViZE9CS1ZyTlBleG5UWEpwT1BpRjdXUVo5RVQyYlVyeExyTndta2RUWkxxUkwKQS9oWGhHaGxTZ3RaTXBtZ2RXNEtwdmR3enZ1anFGWWJWUVVZeHVvdGVQMW1SMVRTc3p3YmlEKyt3NllnbTNNUwpzSHBmSjMxczE2YWlXUVZNREtOYko1dTFuUUtCZ1FERy9yc28ydWszR1BEdEkwbmhJY1I5aFF0Yi83UU16SUlmCm9jMHFPTVpySUZxUjBmdmp5akEzNk1KbktkbG9LTXVyZ1hmeVlldGJQVHZYYkRpam0vSkh2QXNSODlQVGtWVEUKaXNMMGlBUWhjTkYzcElpNDM5QWFQUU5CUm00RUNCYWJib3oyWEJFbEk4QXRJWjY1L0dkL09uTVNRYUlpRG9RWgpuSUNaL2taRTR3S0JnRUVUOVk5ejZDTGY3bDE2ZHUyVWJ0RkxMWjY0aHBWdmcyTXVJSXZTMlhLVGxBNGJaUEIrCmVCRHhmT2NxM3Y3SFMya0s4dStNcHhCR1ZQSE8ySWxLV2JiQVF1bGNPYmk0SGRWTWYzMnVSNXZDRFBSNkg2QkkKVm5zQ1d3VUNHdit4TFpBL0JFKzlOaklGa3JqYXJCQnNTVmRhR21adWhabyt1Wm94VmlOUVRuUTVBb0dBT3RuZgpGQ2daek5ldGVSUjBwd1pMakN1cXZseVRMUzNXVmZDT01xeHowZjdSaWtxbHlpcGp0RVU4S1RKeFA2TEJDVW5TCjVYWWNHdkd6SHZTOGszWnRZdFcwR0cwWitub0NyZFd6N29uRFh2aDBtb09vZzdSOVlTVW1MMG5iQTRvNDFXTU8KZ1ZXZEpIUzhReHlzU3FqaEd2bDRTcS9xZVZQOXNXMWRneTEyTHEwQ2dZQSs3WkkzTEc3QjdSR0w4TkI1NWxJbwpWelkvYjNjeGtub2VTS1pIRktsTUE3bmRLL0tXNElKMDFIR25OS3ZCSzVKZzRBRjlpZWJpbUl1NTJPVVpnWVAxCkNlSzVicUxoNFhRWXpRWHd5L2hQNTVUMnVmLytsSGJwRi9EUms1enVIR0RFU2ZhTTFTa1JxMmZhR2ZXcWdMcDIKd3l2V0poU3JTd0dhVTl3VlpDWjVrUT09Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K"},"kind":"Secret","metadata":{"annotations":{},"labels":{"owner":"tenant-one"},"name":"ingressgateway-certs","namespace":"tenant-one"},"type":"generic"}
+    creationTimestamp: "2020-07-29T02:11:31Z"
     labels:
       owner: tenant-one
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:cacert: {}
+          f:cert: {}
+          f:key: {}
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:owner: {}
+        f:type: {}
+      manager: kubectl
+      operation: Update
+      time: "2020-07-29T02:11:31Z"
     name: ingressgateway-certs
     namespace: tenant-one
+    resourceVersion: "4281"
+    selfLink: /api/v1/namespaces/tenant-one/secrets/ingressgateway-certs
+    uid: b3972a35-2d65-495a-91de-8ade6ea4afa8
   type: generic
 - apiVersion: v1
   kind: Service
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one"},"name":"istio-ingressgateway","namespace":"tenant-one"},"spec":{"externalTrafficPolicy":"Cluster","ports":[{"name":"status-port","port":15020,"protocol":"TCP","targetPort":15020},{"name":"http2","port":80,"protocol":"TCP","targetPort":8080},{"name":"https","port":443,"protocol":"TCP","targetPort":8443},{"name":"tcp","port":31400,"protocol":"TCP","targetPort":31400},{"name":"tls","port":15443,"protocol":"TCP","targetPort":15443}],"selector":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one"},"sessionAffinity":"None","type":"LoadBalancer"}}
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one"},"name":"istio-ingressgateway","namespace":"tenant-one"},"spec":{"ports":[{"name":"status-port","port":15020,"targetPort":15020},{"name":"http2","port":80,"targetPort":80},{"name":"https","port":443},{"name":"kiali","port":15029,"targetPort":15029},{"name":"prometheus","port":15030,"targetPort":15030},{"name":"grafana","port":15031,"targetPort":15031},{"name":"tracing","port":15032,"targetPort":15032},{"name":"tcp","port":31400,"targetPort":31400},{"name":"tls","port":15443,"targetPort":15443}],"selector":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one"},"type":"LoadBalancer"}}
+    creationTimestamp: "2020-07-29T02:11:31Z"
     labels:
       app: istio-ingressgateway
       event: kubecon-eu-2020
       istio: ingressgateway
       owner: tenant-one
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:event: {}
+            f:istio: {}
+            f:owner: {}
+        f:spec:
+          f:externalTrafficPolicy: {}
+          f:ports:
+            .: {}
+            k:{"port":80,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":15020,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":15029,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":15030,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":15031,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":15032,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":15443,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+            k:{"port":31400,"protocol":"TCP"}:
+              .: {}
+              f:name: {}
+              f:port: {}
+              f:protocol: {}
+              f:targetPort: {}
+          f:selector:
+            .: {}
+            f:app: {}
+            f:event: {}
+            f:istio: {}
+            f:owner: {}
+          f:sessionAffinity: {}
+          f:type: {}
+      manager: kubectl
+      operation: Update
+      time: "2020-07-29T02:11:31Z"
     name: istio-ingressgateway
     namespace: tenant-one
+    resourceVersion: "4293"
+    selfLink: /api/v1/namespaces/tenant-one/services/istio-ingressgateway
+    uid: 880463a0-4f06-4471-843d-7272e450b194
   spec:
+    clusterIP: 10.109.98.136
     externalTrafficPolicy: Cluster
     ports:
     - name: status-port
+      nodePort: 31384
       port: 15020
       protocol: TCP
       targetPort: 15020
     - name: http2
+      nodePort: 32411
       port: 80
       protocol: TCP
-      targetPort: 8080
+      targetPort: 80
     - name: https
+      nodePort: 32716
       port: 443
       protocol: TCP
-      targetPort: 8443
+      targetPort: 443
+    - name: kiali
+      nodePort: 31364
+      port: 15029
+      protocol: TCP
+      targetPort: 15029
+    - name: prometheus
+      nodePort: 31284
+      port: 15030
+      protocol: TCP
+      targetPort: 15030
+    - name: grafana
+      nodePort: 32025
+      port: 15031
+      protocol: TCP
+      targetPort: 15031
+    - name: tracing
+      nodePort: 32445
+      port: 15032
+      protocol: TCP
+      targetPort: 15032
     - name: tcp
+      nodePort: 32766
       port: 31400
       protocol: TCP
       targetPort: 31400
     - name: tls
+      nodePort: 30150
       port: 15443
       protocol: TCP
       targetPort: 15443
@@ -110,21 +325,662 @@ items:
       owner: tenant-one
     sessionAffinity: None
     type: LoadBalancer
-- apiVersion: policy/v1beta1
-  kind: PodDisruptionBudget
+  status:
+    loadBalancer: {}
+- apiVersion: apps/v1
+  kind: Deployment
   metadata:
     annotations:
+      deployment.kubernetes.io/revision: "1"
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"policy/v1beta1","kind":"PodDisruptionBudget","metadata":{"annotations":{},"generation":1,"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one","release":"istio"},"name":"istio-ingressgateway","namespace":"tenant-one"},"spec":{"minAvailable":1,"selector":{"matchLabels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one","release":"istio"}}}}
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one"},"name":"istio-ingressgateway","namespace":"tenant-one"},"spec":{"selector":{"matchLabels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one"}},"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"false"},"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one"}},"spec":{"containers":[{"args":["proxy","router","--domain","$(POD_NAMESPACE).svc.cluster.local","--proxyLogLevel=warning","--proxyComponentLogLevel=misc:error","--log_output_level=default:info","--drainDuration","45s","--parentShutdownDuration","1m0s","--connectTimeout","10s","--serviceCluster","istio-ingressgateway","--zipkinAddress","zipkin.istio-system:9411","--proxyAdminPort","15000","--statusPort","15020","--controlPlaneAuthPolicy","NONE","--discoveryAddress","istio-pilot.istio-system.svc:15012","--trust-domain=cluster.local"],"env":[{"name":"JWT_POLICY","value":"first-party-jwt"},{"name":"PILOT_CERT_PROVIDER","value":"istiod"},{"name":"ISTIO_META_USER_SDS","value":"true"},{"name":"CA_ADDR","value":"istio-pilot.istio-system.svc:15012"},{"name":"NODE_NAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"spec.nodeName"}}},{"name":"POD_NAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.name"}}},{"name":"POD_NAMESPACE","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.namespace"}}},{"name":"INSTANCE_IP","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"status.podIP"}}},{"name":"HOST_IP","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"status.hostIP"}}},{"name":"SERVICE_ACCOUNT","valueFrom":{"fieldRef":{"fieldPath":"spec.serviceAccountName"}}},{"name":"ISTIO_META_WORKLOAD_NAME","value":"istio-ingressgateway"},{"name":"ISTIO_META_OWNER","value":"kubernetes://apis/apps/v1/namespaces/tenant-one/deployments/istio-ingressgateway"},{"name":"ISTIO_META_MESH_ID","value":"cluster.local"},{"name":"ISTIO_AUTO_MTLS_ENABLED","value":"true"},{"name":"ISTIO_META_POD_NAME","valueFrom":{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.name"}}},{"name":"ISTIO_META_CONFIG_NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}},{"name":"ISTIO_META_ROUTER_MODE","value":"sni-dnat"},{"name":"ISTIO_META_CLUSTER_ID","value":"Kubernetes"}],"image":"docker.io/istio/proxyv2:1.5.0","imagePullPolicy":"IfNotPresent","name":"istio-proxy","ports":[{"containerPort":15020},{"containerPort":80},{"containerPort":443},{"containerPort":15029},{"containerPort":15030},{"containerPort":15031},{"containerPort":15032},{"containerPort":31400},{"containerPort":15443},{"containerPort":15011},{"containerPort":8060},{"containerPort":853},{"containerPort":15090,"name":"http-envoy-prom","protocol":"TCP"}],"readinessProbe":{"failureThreshold":30,"httpGet":{"path":"/healthz/ready","port":15020,"scheme":"HTTP"},"initialDelaySeconds":1,"periodSeconds":2,"successThreshold":1,"timeoutSeconds":1},"resources":{"limits":{"cpu":"2000m","memory":"1024Mi"},"requests":{"cpu":"10m","memory":"40Mi"}},"volumeMounts":[{"mountPath":"/var/run/secrets/istio","name":"istiod-ca-cert"},{"mountPath":"/var/run/ingress_gateway","name":"ingressgatewaysdsudspath"},{"mountPath":"/etc/istio/pod","name":"podinfo"},{"mountPath":"/etc/istio/ingressgateway-certs","name":"ingressgateway-certs","readOnly":true},{"mountPath":"/etc/istio/ingressgateway-ca-certs","name":"ingressgateway-ca-certs","readOnly":true}]}],"serviceAccountName":"istio-ingressgateway-service-account","volumes":[{"configMap":{"name":"istio-ca-root-cert"},"name":"istiod-ca-cert"},{"downwardAPI":{"items":[{"fieldRef":{"fieldPath":"metadata.labels"},"path":"labels"},{"fieldRef":{"fieldPath":"metadata.annotations"},"path":"annotations"}]},"name":"podinfo"},{"emptyDir":{},"name":"ingressgatewaysdsudspath"},{"name":"ingressgateway-certs","secret":{"optional":true,"secretName":"istio-ingressgateway-certs"}},{"name":"ingressgateway-ca-certs","secret":{"optional":true,"secretName":"istio-ingressgateway-ca-certs"}}]}}}}
+    creationTimestamp: "2020-07-29T02:11:31Z"
     generation: 1
     labels:
       app: istio-ingressgateway
       event: kubecon-eu-2020
       istio: ingressgateway
       owner: tenant-one
-      release: istio
+    managedFields:
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:event: {}
+            f:istio: {}
+            f:owner: {}
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:replicas: {}
+          f:revisionHistoryLimit: {}
+          f:selector:
+            f:matchLabels:
+              .: {}
+              f:app: {}
+              f:event: {}
+              f:istio: {}
+              f:owner: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:annotations:
+                .: {}
+                f:sidecar.istio.io/inject: {}
+              f:labels:
+                .: {}
+                f:app: {}
+                f:event: {}
+                f:istio: {}
+                f:owner: {}
+            f:spec:
+              f:containers:
+                k:{"name":"istio-proxy"}:
+                  .: {}
+                  f:args: {}
+                  f:env:
+                    .: {}
+                    k:{"name":"CA_ADDR"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"HOST_IP"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef:
+                          .: {}
+                          f:apiVersion: {}
+                          f:fieldPath: {}
+                    k:{"name":"INSTANCE_IP"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef:
+                          .: {}
+                          f:apiVersion: {}
+                          f:fieldPath: {}
+                    k:{"name":"ISTIO_AUTO_MTLS_ENABLED"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"ISTIO_META_CLUSTER_ID"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"ISTIO_META_CONFIG_NAMESPACE"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef:
+                          .: {}
+                          f:apiVersion: {}
+                          f:fieldPath: {}
+                    k:{"name":"ISTIO_META_MESH_ID"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"ISTIO_META_OWNER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"ISTIO_META_POD_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef:
+                          .: {}
+                          f:apiVersion: {}
+                          f:fieldPath: {}
+                    k:{"name":"ISTIO_META_ROUTER_MODE"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"ISTIO_META_USER_SDS"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"ISTIO_META_WORKLOAD_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"JWT_POLICY"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"NODE_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef:
+                          .: {}
+                          f:apiVersion: {}
+                          f:fieldPath: {}
+                    k:{"name":"PILOT_CERT_PROVIDER"}:
+                      .: {}
+                      f:name: {}
+                      f:value: {}
+                    k:{"name":"POD_NAME"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef:
+                          .: {}
+                          f:apiVersion: {}
+                          f:fieldPath: {}
+                    k:{"name":"POD_NAMESPACE"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef:
+                          .: {}
+                          f:apiVersion: {}
+                          f:fieldPath: {}
+                    k:{"name":"SERVICE_ACCOUNT"}:
+                      .: {}
+                      f:name: {}
+                      f:valueFrom:
+                        .: {}
+                        f:fieldRef:
+                          .: {}
+                          f:apiVersion: {}
+                          f:fieldPath: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":80,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                    k:{"containerPort":443,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                    k:{"containerPort":853,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                    k:{"containerPort":8060,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                    k:{"containerPort":15011,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                    k:{"containerPort":15020,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                    k:{"containerPort":15029,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                    k:{"containerPort":15030,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                    k:{"containerPort":15031,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                    k:{"containerPort":15032,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                    k:{"containerPort":15090,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:name: {}
+                      f:protocol: {}
+                    k:{"containerPort":15443,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                    k:{"containerPort":31400,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                  f:readinessProbe:
+                    .: {}
+                    f:failureThreshold: {}
+                    f:httpGet:
+                      .: {}
+                      f:path: {}
+                      f:port: {}
+                      f:scheme: {}
+                    f:initialDelaySeconds: {}
+                    f:periodSeconds: {}
+                    f:successThreshold: {}
+                    f:timeoutSeconds: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+                  f:volumeMounts:
+                    .: {}
+                    k:{"mountPath":"/etc/istio/ingressgateway-ca-certs"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/etc/istio/ingressgateway-certs"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                      f:readOnly: {}
+                    k:{"mountPath":"/etc/istio/pod"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/run/ingress_gateway"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+                    k:{"mountPath":"/var/run/secrets/istio"}:
+                      .: {}
+                      f:mountPath: {}
+                      f:name: {}
+              f:dnsPolicy: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:serviceAccount: {}
+              f:serviceAccountName: {}
+              f:terminationGracePeriodSeconds: {}
+              f:volumes:
+                .: {}
+                k:{"name":"ingressgateway-ca-certs"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:optional: {}
+                    f:secretName: {}
+                k:{"name":"ingressgateway-certs"}:
+                  .: {}
+                  f:name: {}
+                  f:secret:
+                    .: {}
+                    f:defaultMode: {}
+                    f:optional: {}
+                    f:secretName: {}
+                k:{"name":"ingressgatewaysdsudspath"}:
+                  .: {}
+                  f:emptyDir: {}
+                  f:name: {}
+                k:{"name":"istiod-ca-cert"}:
+                  .: {}
+                  f:configMap:
+                    .: {}
+                    f:defaultMode: {}
+                    f:name: {}
+                  f:name: {}
+                k:{"name":"podinfo"}:
+                  .: {}
+                  f:downwardAPI:
+                    .: {}
+                    f:defaultMode: {}
+                    f:items: {}
+                  f:name: {}
+      manager: kubectl
+      operation: Update
+      time: "2020-07-29T02:11:31Z"
+    - apiVersion: apps/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2020-07-29T02:11:41Z"
     name: istio-ingressgateway
     namespace: tenant-one
+    resourceVersion: "4350"
+    selfLink: /apis/apps/v1/namespaces/tenant-one/deployments/istio-ingressgateway
+    uid: 0913253d-0621-4f51-a72f-acc6a5e06d68
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: istio-ingressgateway
+        event: kubecon-eu-2020
+        istio: ingressgateway
+        owner: tenant-one
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        annotations:
+          sidecar.istio.io/inject: "false"
+        creationTimestamp: null
+        labels:
+          app: istio-ingressgateway
+          event: kubecon-eu-2020
+          istio: ingressgateway
+          owner: tenant-one
+      spec:
+        containers:
+        - args:
+          - proxy
+          - router
+          - --domain
+          - $(POD_NAMESPACE).svc.cluster.local
+          - --proxyLogLevel=warning
+          - --proxyComponentLogLevel=misc:error
+          - --log_output_level=default:info
+          - --drainDuration
+          - 45s
+          - --parentShutdownDuration
+          - 1m0s
+          - --connectTimeout
+          - 10s
+          - --serviceCluster
+          - istio-ingressgateway
+          - --zipkinAddress
+          - zipkin.istio-system:9411
+          - --proxyAdminPort
+          - "15000"
+          - --statusPort
+          - "15020"
+          - --controlPlaneAuthPolicy
+          - NONE
+          - --discoveryAddress
+          - istio-pilot.istio-system.svc:15012
+          - --trust-domain=cluster.local
+          env:
+          - name: JWT_POLICY
+            value: first-party-jwt
+          - name: PILOT_CERT_PROVIDER
+            value: istiod
+          - name: ISTIO_META_USER_SDS
+            value: "true"
+          - name: CA_ADDR
+            value: istio-pilot.istio-system.svc:15012
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: spec.nodeName
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: INSTANCE_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.podIP
+          - name: HOST_IP
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: status.hostIP
+          - name: SERVICE_ACCOUNT
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: spec.serviceAccountName
+          - name: ISTIO_META_WORKLOAD_NAME
+            value: istio-ingressgateway
+          - name: ISTIO_META_OWNER
+            value: kubernetes://apis/apps/v1/namespaces/tenant-one/deployments/istio-ingressgateway
+          - name: ISTIO_META_MESH_ID
+            value: cluster.local
+          - name: ISTIO_AUTO_MTLS_ENABLED
+            value: "true"
+          - name: ISTIO_META_POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: ISTIO_META_CONFIG_NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: ISTIO_META_ROUTER_MODE
+            value: sni-dnat
+          - name: ISTIO_META_CLUSTER_ID
+            value: Kubernetes
+          image: docker.io/istio/proxyv2:1.5.0
+          imagePullPolicy: IfNotPresent
+          name: istio-proxy
+          ports:
+          - containerPort: 15020
+            protocol: TCP
+          - containerPort: 80
+            protocol: TCP
+          - containerPort: 443
+            protocol: TCP
+          - containerPort: 15029
+            protocol: TCP
+          - containerPort: 15030
+            protocol: TCP
+          - containerPort: 15031
+            protocol: TCP
+          - containerPort: 15032
+            protocol: TCP
+          - containerPort: 31400
+            protocol: TCP
+          - containerPort: 15443
+            protocol: TCP
+          - containerPort: 15011
+            protocol: TCP
+          - containerPort: 8060
+            protocol: TCP
+          - containerPort: 853
+            protocol: TCP
+          - containerPort: 15090
+            name: http-envoy-prom
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 30
+            httpGet:
+              path: /healthz/ready
+              port: 15020
+              scheme: HTTP
+            initialDelaySeconds: 1
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: "2"
+              memory: 1Gi
+            requests:
+              cpu: 10m
+              memory: 40Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /var/run/secrets/istio
+            name: istiod-ca-cert
+          - mountPath: /var/run/ingress_gateway
+            name: ingressgatewaysdsudspath
+          - mountPath: /etc/istio/pod
+            name: podinfo
+          - mountPath: /etc/istio/ingressgateway-certs
+            name: ingressgateway-certs
+            readOnly: true
+          - mountPath: /etc/istio/ingressgateway-ca-certs
+            name: ingressgateway-ca-certs
+            readOnly: true
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: istio-ingressgateway-service-account
+        serviceAccountName: istio-ingressgateway-service-account
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: istio-ca-root-cert
+          name: istiod-ca-cert
+        - downwardAPI:
+            defaultMode: 420
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.labels
+              path: labels
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.annotations
+              path: annotations
+          name: podinfo
+        - emptyDir: {}
+          name: ingressgatewaysdsudspath
+        - name: ingressgateway-certs
+          secret:
+            defaultMode: 420
+            optional: true
+            secretName: istio-ingressgateway-certs
+        - name: ingressgateway-ca-certs
+          secret:
+            defaultMode: 420
+            optional: true
+            secretName: istio-ingressgateway-ca-certs
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2020-07-29T02:11:41Z"
+      lastUpdateTime: "2020-07-29T02:11:41Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2020-07-29T02:11:32Z"
+      lastUpdateTime: "2020-07-29T02:11:41Z"
+      message: ReplicaSet "istio-ingressgateway-56d86f948c" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: policy/v1beta1
+  kind: PodDisruptionBudget
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"policy/v1beta1","kind":"PodDisruptionBudget","metadata":{"annotations":{},"labels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one"},"name":"ingressgateway","namespace":"tenant-one"},"spec":{"minAvailable":1,"selector":{"matchLabels":{"app":"istio-ingressgateway","event":"kubecon-eu-2020","istio":"ingressgateway","owner":"tenant-one"}}}}
+    creationTimestamp: "2020-07-29T02:11:32Z"
+    generation: 1
+    labels:
+      app: istio-ingressgateway
+      event: kubecon-eu-2020
+      istio: ingressgateway
+      owner: tenant-one
+    managedFields:
+    - apiVersion: policy/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:app: {}
+            f:event: {}
+            f:istio: {}
+            f:owner: {}
+        f:spec:
+          f:minAvailable: {}
+          f:selector:
+            .: {}
+            f:matchLabels:
+              .: {}
+              f:app: {}
+              f:event: {}
+              f:istio: {}
+              f:owner: {}
+      manager: kubectl
+      operation: Update
+      time: "2020-07-29T02:11:32Z"
+    - apiVersion: policy/v1beta1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:currentHealthy: {}
+          f:desiredHealthy: {}
+          f:expectedPods: {}
+          f:observedGeneration: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2020-07-29T02:11:41Z"
+    name: ingressgateway
+    namespace: tenant-one
+    resourceVersion: "4346"
+    selfLink: /apis/policy/v1beta1/namespaces/tenant-one/poddisruptionbudgets/ingressgateway
+    uid: 13bbbd26-97e6-4b71-b423-b8e504a5713e
   spec:
     minAvailable: 1
     selector:
@@ -133,53 +989,100 @@ items:
         event: kubecon-eu-2020
         istio: ingressgateway
         owner: tenant-one
-        release: istio
+  status:
+    currentHealthy: 1
+    desiredHealthy: 1
+    disruptionsAllowed: 0
+    expectedPods: 1
+    observedGeneration: 1
 - apiVersion: networking.istio.io/v1alpha3
   kind: Gateway
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"networking.istio.io/v1alpha3","kind":"Gateway","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-one"},"name":"bookinfo-gateway","namespace":"tenant-one"},"spec":{"selector":{"istio":"ingressgateway"},"servers":[{"hosts":["tenant-one.example.com"],"port":{"name":"http","number":80,"protocol":"HTTP"}},{"hosts":["tenant-one.example.com"],"port":{"name":"https","number":443,"protocol":"HTTPS"},"tls":{"credentialName":"ingressgateway-certs","mode":"MUTUAL"}}]}}
+        {"apiVersion":"networking.istio.io/v1alpha3","kind":"Gateway","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-one"},"name":"bookinfo-gateway","namespace":"tenant-one"},"spec":{"selector":{"istio":"ingressgateway"},"servers":[{"hosts":["*"],"port":{"name":"http","number":80,"protocol":"HTTP"}}]}}
+    creationTimestamp: "2020-07-29T02:19:02Z"
+    generation: 1
     labels:
       event: kubecon-eu-2020
       owner: tenant-one
+    managedFields:
+    - apiVersion: networking.istio.io/v1alpha3
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:event: {}
+            f:owner: {}
+        f:spec:
+          .: {}
+          f:selector:
+            .: {}
+            f:istio: {}
+          f:servers: {}
+      manager: kubectl
+      operation: Update
+      time: "2020-07-29T02:19:02Z"
     name: bookinfo-gateway
     namespace: tenant-one
+    resourceVersion: "5956"
+    selfLink: /apis/networking.istio.io/v1alpha3/namespaces/tenant-one/gateways/bookinfo-gateway
+    uid: 4c5bd13f-eb9a-4a98-9ec2-d25f2c76ef16
   spec:
     selector:
       istio: ingressgateway
     servers:
     - hosts:
-      - tenant-one.example.com
+      - '*'
       port:
         name: http
         number: 80
         protocol: HTTP
-    - hosts:
-      - tenant-one.example.com
-      port:
-        name: https
-        number: 443
-        protocol: HTTPS
-      tls:
-        credentialName: ingressgateway-certs
-        mode: MUTUAL
 - apiVersion: networking.istio.io/v1alpha3
   kind: VirtualService
   metadata:
     annotations:
       kubectl.kubernetes.io/last-applied-configuration: |
-        {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-one"},"name":"bookinfo","namespace":"tenant-one"},"spec":{"gateways":["bookinfo-gateway"],"hosts":["tenant-one.example.com"],"http":[{"match":[{"uri":{"exact":"/productpage"}},{"uri":{"prefix":"/static"}},{"uri":{"exact":"/login"}},{"uri":{"exact":"/logout"}},{"uri":{"prefix":"/api/v1/products"}}],"route":[{"destination":{"host":"productpage","port":{"number":9080}}}]}]}}
+        {"apiVersion":"networking.istio.io/v1alpha3","kind":"VirtualService","metadata":{"annotations":{},"labels":{"event":"kubecon-eu-2020","owner":"tenant-one"},"name":"bookinfo","namespace":"tenant-one"},"spec":{"gateways":["bookinfo-gateway"],"hosts":["*"],"http":[{"match":[{"uri":{"exact":"/productpage"}},{"uri":{"prefix":"/static"}},{"uri":{"exact":"/login"}},{"uri":{"exact":"/logout"}},{"uri":{"prefix":"/api/v1/products"}}],"route":[{"destination":{"host":"productpage","port":{"number":9080}}}]}]}}
+    creationTimestamp: "2020-07-29T02:14:52Z"
+    generation: 1
     labels:
       event: kubecon-eu-2020
       owner: tenant-one
+    managedFields:
+    - apiVersion: networking.istio.io/v1alpha3
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kubectl.kubernetes.io/last-applied-configuration: {}
+          f:labels:
+            .: {}
+            f:event: {}
+            f:owner: {}
+        f:spec:
+          .: {}
+          f:gateways: {}
+          f:hosts: {}
+          f:http: {}
+      manager: kubectl
+      operation: Update
+      time: "2020-07-29T02:14:52Z"
     name: bookinfo
     namespace: tenant-one
+    resourceVersion: "5181"
+    selfLink: /apis/networking.istio.io/v1alpha3/namespaces/tenant-one/virtualservices/bookinfo
+    uid: 86a4e30f-b2e9-462e-a799-fd212e7838fb
   spec:
     gateways:
     - bookinfo-gateway
     hosts:
-    - tenant-one.example.com
+    - '*'
     http:
     - match:
       - uri:

@@ -4,7 +4,7 @@ metadata:
   name: bookinfo
 spec:
   hosts:
-  - tenant-two.example.com
+  - "*" 
   gateways:
   - bookinfo-gateway
   http:

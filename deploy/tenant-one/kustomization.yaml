@@ -4,15 +4,14 @@ kind: Kustomization
 bases:
 - ../base
 
-patchesStrategicMerge:
-- gateway.yaml
-- virtualservice.yaml
-
 commonLabels:
   owner: tenant-one
 
 namespace: tenant-one
 
+patchesStrategicMerge:
+- deployment.yaml
+  
 generatorOptions:
   disableNameSuffixHash: true
 
