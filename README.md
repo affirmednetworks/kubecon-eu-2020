@@ -22,9 +22,10 @@ kind create cluster --config ~/.kind/kubecon.config --name kubecon
 kubectl cluster-info --context kind-kubecon
 ```
 
-##### Docker for Mac
+##### Docker for Mac / Minikube / Standard Cluster
 
 https://docs.docker.com/docker-for-mac/kubernetes/
+https://kubernetes.io/docs/tasks/tools/install-minikube/
 
 #### Istioctl
 
@@ -65,9 +66,9 @@ kubectl apply -k deploy/sleep
 
 ### Expose Gateways
 
-#### docker-for-mac
+#### Docker for Mac / Minikube / Standard Cluster
 
-`istio-ingressgateway` service in each tenant namespace has the HTTP2 and HTTPS `NodePort` set to default values,
+`istio-ingressgateway` service in each tenant namespace has the HTTP2 and HTTPS `NodePort` (you can use `LoadBalancer` on clusters that support externalIPs) set to default values,
 
 ##### Tenant-1
 
@@ -94,7 +95,7 @@ CLUSTER_IP_TWO=$(kubectl -n tenant-two get service istio-ingressgateway -o jsonp
 
 ### Try it out
 
-#### Docker-for-mac
+#### Docker for Mac / Minikube / Standard Cluster
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a16e7d6bee6ab779e456)
 
