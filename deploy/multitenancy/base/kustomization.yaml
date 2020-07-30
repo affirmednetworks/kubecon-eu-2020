@@ -13,3 +13,4 @@ resources:
 - serviceaccount.yaml
 - service.yaml 
 - virtualservice.yaml 
+- bookinfo.yaml
