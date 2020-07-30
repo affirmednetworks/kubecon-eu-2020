@@ -11,6 +11,8 @@ https://drive.google.com/file/d/1ipQD_4WvBKT9oZCk8UnPGZ4-eKgpvz3U/view?usp=shari
 
 ## Demo - Setup (MacOS)
 
+### Pre-requisites
+
 #### Kubernetes Cluster
 
 ##### KinD
@@ -24,6 +26,9 @@ kubectl cluster-info --context kind-kubecon
 
 https://docs.docker.com/docker-for-mac/kubernetes/
 
+#### Istioctl
+
+https://istio.io/latest/docs/setup/getting-started/#download
 
 ### Deploy
 
@@ -48,7 +53,7 @@ kubectl apply -k deploy/multitenancy/tenant-one
 ```bash
 kubectl create ns tenant-two
 kubectl label namespace tenant-two istio-injection=enabled
-kubectl apply -k tenant-two
+kubectl apply -k deploy/multitenancy/tenant-two
 ```
 
 ##### Sleep (for KinD only)
@@ -91,10 +96,11 @@ CLUSTER_IP_TWO=$(kubectl -n tenant-two get service istio-ingressgateway -o jsonp
 
 #### Docker-for-mac
 
-> TODO: Add postman collection to project
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a16e7d6bee6ab779e456)
 
-Use Postman (collection included in repo)
+Follow the screenshot below to setup the client certificates
 
+![Image of postman](assets/images/postman.png)
 #### KinD
 
 ##### Tenant-1 client to server - Success
