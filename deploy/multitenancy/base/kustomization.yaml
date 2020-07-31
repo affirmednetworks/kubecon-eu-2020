@@ -5,12 +5,15 @@ commonLabels:
     event: kubecon-eu-2020
     
 resources:
-- deployment.yaml
+- ingress-deployment.yaml
+- egress-deployment.yaml
+- ingress-service.yaml 
+- egress-service.yaml 
+- ingress-pdb.yaml
+- egress-pdb.yaml
 - gateway.yaml
-- pdb.yaml
 - role.yaml
 - rolebinding.yaml
 - serviceaccount.yaml
-- service.yaml 
 - virtualservice.yaml 
 - bookinfo.yaml

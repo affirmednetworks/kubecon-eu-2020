@@ -10,8 +10,9 @@ commonLabels:
 namespace: tenant-one
 
 patchesStrategicMerge:
-- deployment.yaml
-- service.yaml
+- ingress-deployment.yaml
+- egress-deployment.yaml
+- ingress-service.yaml
 - gateway.yaml
   
 generatorOptions:
