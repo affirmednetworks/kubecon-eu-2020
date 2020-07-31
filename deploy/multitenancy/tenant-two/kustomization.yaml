@@ -12,6 +12,7 @@ namespace: tenant-two
 patchesStrategicMerge:
 - deployment.yaml
 - service.yaml
+- gateway.yaml
   
 generatorOptions:
   disableNameSuffixHash: true

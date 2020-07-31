@@ -4,6 +4,7 @@ metadata:
   labels:
     app: istio-ingressgateway
     istio: ingressgateway
+    owner: tenant-one
   name: istio-ingressgateway
 spec:
   selector:
@@ -17,6 +18,7 @@ spec:
       labels:
         app: istio-ingressgateway
         istio: ingressgateway
+        owner: tenant-one
     spec:
       containers:
       - args:
