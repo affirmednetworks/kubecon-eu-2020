@@ -18,7 +18,7 @@ https://drive.google.com/file/d/1ipQD_4WvBKT9oZCk8UnPGZ4-eKgpvz3U/view?usp=shari
 ##### KinD
 
 ```bash
-kind create cluster --config ~/.kind/kubecon.config --name kubecon
+kind create cluster --config $PWD/kind.config --name kubecon
 kubectl cluster-info --context kind-kubecon
 ```
 
