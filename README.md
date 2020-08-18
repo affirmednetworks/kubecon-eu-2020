@@ -7,7 +7,7 @@
 Tuesday, August 18 • 14:30 - 15:05
 
 ## Slides
-https://drive.google.com/file/d/1ipQD_4WvBKT9oZCk8UnPGZ4-eKgpvz3U/view?usp=sharing
+https://drive.google.com/file/d/1Ag_tvDawCTg9sL1r1GB_3mC9_ZMVi5oa/view?usp=sharing
 
 ## Demo - Setup (MacOS)
 
